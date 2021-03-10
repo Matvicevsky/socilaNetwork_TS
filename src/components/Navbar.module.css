@@ -1,0 +1,7 @@
+.siteBar {
+    width: 30%;
+    background-color: #dea07f;
+}
+.item>a{
+    color: white;
+}

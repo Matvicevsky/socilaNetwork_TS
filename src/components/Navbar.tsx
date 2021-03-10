@@ -1,25 +1,25 @@
 import React from 'react';
+import navbar from './Navbar.module.css';
 
 export function Navbar() {
     return (
-        <div className={"site-bar"}>
-            <nav className={"navbar"}>
-                <div>
+            <nav className={navbar.siteBar} >
+                <div className={navbar.item}>
                     <a href={"#"}>Profile</a>
                 </div>
-                <div>
+                <div className={navbar.item}>
                     <a href={"#"}>Messages</a>
                 </div>
-                <div>
+                <div className={navbar.item}>
                     <a href={"#"}>News</a>
                 </div>
-                <div>
+                <div className={navbar.item}>
                     <a href={"#"}>Music</a>
                 </div>
-                <div>
+                <div className={navbar.item}>
                     <a href={"#"}>Settings</a>
                 </div>
             </nav>
-        </div>
+
     );
 }
