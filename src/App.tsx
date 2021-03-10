@@ -7,9 +7,13 @@ import {Profile} from "./components/Profile";
 function App() {
     return (
         <div className="App-wrapper">
-            <Header />
-            <Navbar />
-            <Profile />
+            <Header/>
+            <div className={"body"}>
+                <Navbar/>
+                <div className={"content"}>
+                    <Profile/>
+                </div>
+            </div>
         </div>
     );
 }

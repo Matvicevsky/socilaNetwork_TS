@@ -2,7 +2,7 @@ import React from 'react';
 
 export function Navbar() {
     return (
-        <div>
+        <div className={"site-bar"}>
             <nav className={"navbar"}>
                 <div>
                     <a href={"#"}>Profile</a>
