@@ -1,6 +1,9 @@
+.info {
+    display: flex;
+}
 .avatar {
     width: 200px;
 }
-.item{
-    color: #0ccb1f;
+.description {
+    margin-left: 40px;
 }

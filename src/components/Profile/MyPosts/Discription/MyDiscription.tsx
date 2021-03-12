@@ -1,12 +1,17 @@
 import React from 'react';
-import  discription from './MyDiscription.module.css';
+import  description from './MyDiscription.module.css';
 
 export function MyDiscription() {
     return (
-        <div className={discription.info}>
-            <img className={discription.avatar}
+        <div className={description.info}>
+            <img className={description.avatar}
                  src={"https://cdn1.iconfinder.com/data/icons/diversity-avatars-volume-01-circles/64/matrix-neo-man-white-512.png"}/>
-            ava+info
+            <div className={description.description} >
+                <div>name</div>
+                <div>city</div>
+                <div>status</div>
+                <div>????</div>
+            </div>
         </div>
     );
 }

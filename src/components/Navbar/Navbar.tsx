@@ -1,12 +1,16 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import navbar from './Navbar.module.css';
 
 export type navbarPropsType = {
     title: Array<navbarItemPropsType>
+
 }
 export type navbarItemPropsType = {
     id: string,
     title: string,
+    link: string
+
 
 }
 
@@ -14,29 +18,18 @@ export function Navbar(props: navbarPropsType) {
     return (
         <nav className={navbar.siteBar}>
             {
-                props.title.map( t => {
+                props.title.map(t => {
                     return (
                         <div className={navbar.item}>
-                            <a href={"#"}>{t.title}</a>
+                            <NavLink className={navbar.link}
+                                     activeClassName={navbar.active}
+                                     to={t.link}>{t.title}
+                            </NavLink>
                         </div>
                     );
                 })
             }
-            {/*<div className={navbar.item}>
-                    <a href={"#"}>Profile</a>
-                </div>
-                <div className={navbar.item}>
-                    <a href={"#"}>Messages</a>
-                </div>
-                <div className={navbar.item}>
-                    <a href={"#"}>News</a>
-                </div>
-                <div className={navbar.item}>
-                    <a href={"#"}>Music</a>
-                </div>
-                <div className={navbar.item}>
-                    <a href={"#"}>Settings</a>
-                </div>*/}
+
         </nav>
 
     );
