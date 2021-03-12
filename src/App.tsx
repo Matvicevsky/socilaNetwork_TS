@@ -1,36 +1,51 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
-import {v1} from "uuid";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from 'react-router-dom';
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 
-function App() {
+type AppPropsType = {
+    navbar: Array<AppNavbarPropsType>,
+    contacts: Array<AppContactsMessagePropsType>,
+}
 
-    let [navbar, setNavbar] = useState([
-        {id: v1(), title: "Profile", link: "/profile"},
-        {id: v1(), title: "Messages", link: "/dialogs"},
-        {id: v1(), title: "News", link: "/news"},
-        {id: v1(), title: "Music", link: "/music"},
-        {id: v1(), title: "Settings", link: "/settings"}
-    ]);
+type AppNavbarPropsType = {
+    id: string,
+    title: string,
+    link: string
+}
+
+type AppContactsMessagePropsType = {
+    id: string,
+    avatar: string,
+    title: string,
+    nicName: string,
+    link: string
+}
+
+
+function App(props: AppPropsType ) {
+
+    let DialogProps = () => <Dialogs title={props.contacts}/>
+
+
     return (
         <BrowserRouter>
             <div className="App-wrapper">
                 <Header/>
                 <div className={"body"}>
-                    <Navbar title={navbar}/>
+                    <Navbar title={props.navbar}/>
                     <div className={"content"}>
-                        <Route path={navbar[0].link} component={Profile}/>
-                        <Route path={navbar[1].link} component={Dialogs}/>
-                        <Route path={navbar[2].link} component={News}/>
-                        <Route path={navbar[3].link} component={Music}/>
-                        <Route path={navbar[4].link} component={Settings}/>
+                        <Route path={props.navbar[0].link} component={Profile}/>
+                        <Route path={props.navbar[1].link} component={DialogProps}/>
+                        <Route path={props.navbar[2].link} component={News}/>
+                        <Route path={props.navbar[3].link} component={Music}/>
+                        <Route path={props.navbar[4].link} component={Settings}/>
                     </div>
                 </div>
             </div>

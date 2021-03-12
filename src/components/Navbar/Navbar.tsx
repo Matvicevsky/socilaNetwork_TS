@@ -4,14 +4,12 @@ import navbar from './Navbar.module.css';
 
 export type navbarPropsType = {
     title: Array<navbarItemPropsType>
-
 }
+
 export type navbarItemPropsType = {
     id: string,
     title: string,
     link: string
-
-
 }
 
 export function Navbar(props: navbarPropsType) {
@@ -29,8 +27,6 @@ export function Navbar(props: navbarPropsType) {
                     );
                 })
             }
-
         </nav>
-
     );
 }
