@@ -6,12 +6,13 @@
 }
 .link{
     color: white;
-    margin: 10px;
+    margin: 20px;
     font-family: sans-serif;
     text-decoration: none;
     font-size: 20px;
-
 }
+
+
 .link.active{
     color: gold;
 }

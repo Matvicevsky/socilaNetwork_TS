@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import dialogs from './Dialogs.module.css';
 import {Dialog} from "./Dialog/Dialog";
 import {Contacts} from './Contacts/Contacts';
 import {BrowserRouter, Route} from "react-router-dom";
 
 type DialogsPropsType = {
-    title: Array<DialogsContactsMessagePropsType>,
+    title:  Array<DialogsContactsMessagePropsType> ,
 }
 type DialogsContactsMessagePropsType = {
     id: string,
@@ -17,18 +17,11 @@ type DialogsContactsMessagePropsType = {
 }
 
 
-
 export function Dialogs(props: DialogsPropsType) {
 
-
-    let DialogProps = () => {
-        return (
-            <Dialog title={props.title}/>
-        )
-    }
+    let DialogProps = () =>  <Dialog title={props.title}/>
 
     return (
-                <BrowserRouter>
             <div className={dialogs.content}>
                 <Contacts title={props.title}/>
                 <Route path={props.title[0].link}
@@ -39,10 +32,7 @@ export function Dialogs(props: DialogsPropsType) {
                        component={DialogProps}/>
                 <Route path={props.title[3].link}
                        component={DialogProps}/>
-
-
             </div>
-        </BrowserRouter>
     );
 
 }

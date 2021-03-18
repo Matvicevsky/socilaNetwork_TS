@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import navbar from './Navbar.module.css';
 
 export type navbarPropsType = {
-    title: Array<navbarItemPropsType>
+    title:  Array<navbarItemPropsType>
 }
 
 export type navbarItemPropsType = {

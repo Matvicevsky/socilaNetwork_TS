@@ -1,12 +1,11 @@
 .App-wrapper {
-    width: 1000px;
+    max-width: 1000px;
     margin: 0 auto;
     background-color: #000;
 }
 .content{
     width: 70%;
 }
-
 
 .body {
     display: flex;

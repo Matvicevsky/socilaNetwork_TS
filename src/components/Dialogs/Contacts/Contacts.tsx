@@ -24,6 +24,7 @@ export function Contacts(props: ContactsPropsType) {
                             <li className={contacts.listItem}>
                                 <img className={contacts.avatar}
                                      src={t.avatar}
+                                     alt={'avatar'}
                                 />
                                 <NavLink className={contacts.link}
                                          activeClassName={contacts.active}

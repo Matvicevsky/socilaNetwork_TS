@@ -12,7 +12,7 @@ export function News() {
             news
             <div>
                 <button onClick={press}>нажми сюда</button>
-                <span className={color}>Артем какашка</span>
+                <span className={color}>Илья толстенький и толстый и камок грязи, жаба и свинья, а ткаже он самый толстый на свете</span>
             </div>
         </div>
     );
