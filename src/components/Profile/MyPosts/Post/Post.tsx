@@ -23,7 +23,8 @@ export function Post(props: MyPostsPropsType) {
                         </div>
                         <div className={post.title}>
                             <div className={post.item}>{t.message}</div>
-                            <button>like</button>
+                            <button onClick={() => {
+                                return t.count++}}>like</button>
                             <span>count:{t.count}</span>
                         </div>
                     </div>

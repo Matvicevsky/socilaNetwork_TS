@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
+import React  from 'react';
 import dialog from './Dialog.module.css';
-import {v1} from "uuid";
 
 type DialogPropsType = {
     title: Array<DialogItemPropsType>,
@@ -32,11 +31,10 @@ export function Dialog(props: DialogPropsType) {
                  alt={"avatar"}/>
             <div className={dialog.message}>
                 <div className={dialog.nik}>
-                    ery
+                    unnamed
                 </div>
                 <div className={dialog.title}>
-                    erye
-                    dgsdg
+
                     <div>
                         <textarea ref={textNewMessage}/>
                         <button onClick={newMessage}>add message</button>
