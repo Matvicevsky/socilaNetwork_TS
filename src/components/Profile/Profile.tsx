@@ -6,6 +6,7 @@ import {PostMessagesPropsType} from "../../App";
 
 type ProfilePostMessagesPropsType = {
     title: Array<PostMessagesPropsType>
+    addPost: (messagePost: any) => void,
 }
 
 export function Profile(props: ProfilePostMessagesPropsType) {
@@ -15,7 +16,7 @@ export function Profile(props: ProfilePostMessagesPropsType) {
                  src="https://www.barnesandnoble.com/blog/sci-fi-fantasy/wp-content/nas-uploads/sites/4/2019/09/matrix.png"
                  alt="png"/>
             <MyDiscription/>
-            <MyPosts title={props.title}/>
+            <MyPosts title={props.title} addPost={props.addPost}/>
 
         </div>
     );

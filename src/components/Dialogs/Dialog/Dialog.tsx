@@ -13,8 +13,15 @@ type DialogItemPropsType = {
     link: string
 
 }
+type textNewMessageType = any
 
 export function Dialog(props: DialogPropsType) {
+
+    let textNewMessage: textNewMessageType = React.createRef();
+    let newMessage = () => {
+        let text = textNewMessage.current.value;
+        alert(text)
+    }
 
     return (
 
@@ -29,6 +36,11 @@ export function Dialog(props: DialogPropsType) {
                 </div>
                 <div className={dialog.title}>
                     erye
+                    dgsdg
+                    <div>
+                        <textarea ref={textNewMessage}/>
+                        <button onClick={newMessage}>add message</button>
+                    </div>
                 </div>
             </div>
         </div>

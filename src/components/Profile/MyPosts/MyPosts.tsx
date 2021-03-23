@@ -4,14 +4,18 @@ import {Post} from "./Post/Post";
 import {PostMessagesPropsType} from "../../../App";
 
 type MyPostsPropsType = {
-    title: Array<PostMessagesPropsType>
+    title: Array<PostMessagesPropsType>,
+    addPost: (messagePost: any) => void,
 }
+type newPostElementType = any
 
+export function MyPosts(props: MyPostsPropsType) {
+    let newPostElement: newPostElementType = React.createRef();
+    let addPost = () => {
 
-
-export function MyPosts(props: MyPostsPropsType ) {
-
-
+        let text = newPostElement.current.value;
+        props.addPost(text)
+    }
 
 
     return (
@@ -19,13 +23,15 @@ export function MyPosts(props: MyPostsPropsType ) {
             <h4>my posts</h4>
             <div>
                 <div>
-                    <textarea/>
+                    <textarea ref={newPostElement}>
+
+                    </textarea>
                 </div>
-                <button>Add post</button>
+                <button onClick={addPost}>Add post</button>
             </div>
             <div>
                 <h4>posts</h4>
-                <Post title={props.title}/>
+                <Post title={props.title} />
             </div>
         </div>
     );

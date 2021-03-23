@@ -13,8 +13,9 @@ type AppPropsType = {
     appState: {
         navbar: Array<AppNavbarPropsType>,
         contactsMessage: Array<AppContactsMessagePropsType>,
-        PostMessages: Array<PostMessagesPropsType>
+        PostMessages: Array<PostMessagesPropsType>,
     }
+    addPost: (messagePost: any) => void,
 }
 
 type AppNavbarPropsType = {
@@ -43,7 +44,7 @@ export type PostMessagesPropsType = {
 function App(props: AppPropsType) {
 
     let DialogProps = () => <Dialogs title={props.appState.contactsMessage}/>
-    let ProfileProps = () => <Profile title={props.appState.PostMessages}/>
+    let ProfileProps = () => <Profile title={props.appState.PostMessages} addPost={props.addPost}/>
 
 
     return (

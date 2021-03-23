@@ -3,7 +3,8 @@ import post from './Post.module.css';
 import {PostMessagesPropsType} from "../../../../App";
 
 type MyPostsPropsType = {
-    title: Array<PostMessagesPropsType>
+    title: Array<PostMessagesPropsType>,
+
 }
 
 export function Post(props: MyPostsPropsType) {

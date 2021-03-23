@@ -1,7 +1,6 @@
 import React from "react";
 import {v1} from "uuid";
-
-
+import {rerenderEntireTree} from "../Render";
 
 
 export let state = {
@@ -46,10 +45,45 @@ export let state = {
     ],
     // for profile>post
     PostMessages: [
-        {id: v1(), avatar: "https://cdn1.iconfinder.com/data/icons/diversity-avatars-volume-01-circles/64/matrix-trinity-512.png" , nicName: "Trinitttttti", message: "How are yuo", count: 42},
-        {id: v1(), avatar: "https://icons.iconarchive.com/icons/mattahan/ultrabuuf/256/TV-Smith-icon.png" , nicName: "Mr.Smith", message: "I am kill yor", count: 422},
-        {id: v1(), avatar: "https://icons.iconarchive.com/icons/mattahan/ultrabuuf/256/TV-Smith-icon.png" , nicName: "Mrrrrr.Smith", message: "I am kill yor", count: 422},
-        {id: v1(), avatar: "https://icons.iconarchive.com/icons/mattahan/ultrabuuf/256/TV-Smith-icon.png" , nicName: "Mr.Smith", message: "I am kill yor", count: 422},
+        {
+            id: v1(),
+            avatar: "https://cdn1.iconfinder.com/data/icons/diversity-avatars-volume-01-circles/64/matrix-trinity-512.png",
+            nicName: "Trinitttttti",
+            message: "How are yuo",
+            count: 42
+        },
+        {
+            id: v1(),
+            avatar: "https://icons.iconarchive.com/icons/mattahan/ultrabuuf/256/TV-Smith-icon.png",
+            nicName: "Mr.Smith",
+            message: "I am kill yor",
+            count: 422
+        },
+        {
+            id: v1(),
+            avatar: "https://icons.iconarchive.com/icons/mattahan/ultrabuuf/256/TV-Smith-icon.png",
+            nicName: "Mrrrrr.Smith",
+            message: "I am kill yor",
+            count: 422
+        },
+        {
+            id: v1(),
+            avatar: "https://icons.iconarchive.com/icons/mattahan/ultrabuuf/256/TV-Smith-icon.png",
+            nicName: "Mr.Smith",
+            message: "I am kill yor",
+            count: 422
+        },
     ]
 }
 
+export let addPost = (messagePost: any) => {
+    let newPost = {
+        id: v1(),
+        avatar: "none",
+        nicName: "none",
+        message: messagePost,
+        count: 0,
+    };
+    state.PostMessages.push(newPost);
+    rerenderEntireTree();
+}
