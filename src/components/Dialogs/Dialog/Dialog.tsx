@@ -1,16 +1,11 @@
-import React  from 'react';
+import React from 'react';
 import dialog from './Dialog.module.css';
 
-type DialogPropsType = {
-    title: Array<DialogItemPropsType>,
-}
-type DialogItemPropsType = {
-    id: string,
-    avatar: string,
-    title: string,
-    nicName: string,
-    link: string
 
+type DialogPropsType = {
+    title: Array<string>,
+    value: string
+    dispatch: any
 }
 type textNewMessageType = any
 
@@ -18,8 +13,11 @@ export function Dialog(props: DialogPropsType) {
 
     let textNewMessage: textNewMessageType = React.createRef();
     let newMessage = () => {
+       props.dispatch( {type: 'ADD-MESSAGE'} )
+    }
+    let onMessageChange = () => {
         let text = textNewMessage.current.value;
-        alert(text)
+        props.dispatch( { type: 'UPDATE-NEW-MESSAGE-TEXT', newText: text} );
     }
 
     return (
@@ -34,10 +32,16 @@ export function Dialog(props: DialogPropsType) {
                     unnamed
                 </div>
                 <div className={dialog.title}>
-
+                    {
+                        props.title.map(t => <div className={dialog.dialog}>{t}</div>)
+                    }
                     <div>
-                        <textarea ref={textNewMessage}/>
-                        <button onClick={newMessage}>add message</button>
+                        <textarea ref={textNewMessage}
+                                  onChange={onMessageChange}
+                                  value={props.value}/>
+                        <button onClick={newMessage}>
+                            add message
+                        </button>
                     </div>
                 </div>
             </div>

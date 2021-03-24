@@ -14,11 +14,12 @@ type AppPropsType = {
         navbar: Array<AppNavbarPropsType>,
         contactsMessage: Array<AppContactsMessagePropsType>,
         PostMessages: Array<PostMessagesPropsType>,
-        newPostText: string
-
+        newPostText: string | undefined
+        dialogMessage: Array<string>
+        newDialog: string
     }
-    addPost: (messagePost: any) => void,
-    updateNewPostText: (newPostText: any) => void,
+    dispatch: any
+
 }
 
 type AppNavbarPropsType = {
@@ -46,29 +47,26 @@ export type PostMessagesPropsType = {
 
 function App(props: AppPropsType) {
 
-    let DialogProps = () => <Dialogs title={props.appState.contactsMessage}/>
-    let ProfileProps = () => <Profile title={props.appState.PostMessages}
-                                      addPost={props.addPost}
-                                      newPostText={props.appState.newPostText}
-                                      updateNewPostText={props.updateNewPostText}/>
-
     return (
         <div className="App-wrapper">
             <Header/>
             <div className={"body"}>
                 <Navbar title={props.appState.navbar}/>
                 <div className={"content"}>
-                    <Route path={props.appState.navbar[0].link} render={ () => <Profile title={props.appState.PostMessages}
-                                                                                 addPost={props.addPost}
-                                                                                 newPostText={props.appState.newPostText}
-                                                                                 updateNewPostText={props.updateNewPostText}/>}/>
-                    <Route path={props.appState.navbar[1].link} render={ () => <Profile title={props.appState.PostMessages}
-                                                                                       addPost={props.addPost}
-                                                                                       newPostText={props.appState.newPostText}
-                                                                                       updateNewPostText={props.updateNewPostText}/>}/>
-                    <Route path={props.appState.navbar[2].link} render={ () => <News/>}/>
-                    <Route path={props.appState.navbar[3].link} render={ () => <Music/>}/>
-                    <Route path={props.appState.navbar[4].link} render={ () => <Settings/>}/>
+                    <Route path={props.appState.navbar[0].link}
+                           render={() => <Profile title={props.appState.PostMessages}
+                                                  dispatch={props.dispatch}
+                                                  newPostText={props.appState.newPostText}/>}/>
+                    <Route path={props.appState.navbar[1].link}
+                           render={() => <Dialogs title={props.appState}
+                                                  dispatch={props.dispatch}/>}
+                    />
+                    <Route path={props.appState.navbar[2].link}
+                           render={() => <News/>}/>
+                    <Route path={props.appState.navbar[3].link}
+                           render={() => <Music/>}/>
+                    <Route path={props.appState.navbar[4].link}
+                           render={() => <Settings/>}/>
                 </div>
             </div>
         </div>

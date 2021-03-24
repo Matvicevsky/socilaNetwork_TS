@@ -6,9 +6,9 @@ import {PostMessagesPropsType} from "../../App";
 
 type ProfilePostMessagesPropsType = {
     title: Array<PostMessagesPropsType>
-    addPost: (messagePost: any) => void,
-    newPostText: string,
-    updateNewPostText: (newPostText: any) => void,
+    dispatch: any
+    newPostText: string | undefined
+
 }
 
 export function Profile(props: ProfilePostMessagesPropsType) {
@@ -20,9 +20,7 @@ export function Profile(props: ProfilePostMessagesPropsType) {
             <MyDiscription/>
             <MyPosts title={props.title}
                      newPostText={props.newPostText}
-                     updateNewPostText={props.updateNewPostText}
-                     addPost={props.addPost}
-                     />
+                     dispatch={props.dispatch}/>
 
         </div>
     );

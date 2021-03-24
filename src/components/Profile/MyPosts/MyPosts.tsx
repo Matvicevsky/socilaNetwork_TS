@@ -5,24 +5,23 @@ import {PostMessagesPropsType} from "../../../App";
 
 type MyPostsPropsType = {
     title: Array<PostMessagesPropsType>,
-    addPost: (messagePost: any) => void,
-    newPostText: string,
-    updateNewPostText: (newPostText: string) => void,
+    dispatch: any
+    newPostText: string | undefined
+
 }
-type newPostElementType = any
+
 
 export function MyPosts(props: MyPostsPropsType) {
-    let newPostElement: newPostElementType = React.createRef();
+
+    let newPostElement = React.createRef<HTMLTextAreaElement>();
 
     let addPost = () => {
-        let text = newPostElement.current.value;
-        props.addPost(text);
-        props.updateNewPostText('');
+        props.dispatch({ type: 'ADD-POST' });
     }
 
     let onPostChange = () => {
-        let text = newPostElement.current.value;
-        props.updateNewPostText(text);
+        let text = newPostElement.current?.value;
+        props.dispatch( { type: 'UPDATE-NEW-POST-TEXT', newText: text } );
     }
 
 
@@ -31,7 +30,7 @@ export function MyPosts(props: MyPostsPropsType) {
             <h4>my posts</h4>
             <div>
                 <div>
-                    <textarea key={'sf'}
+                    <textarea
                         onChange={onPostChange}
                               ref={newPostElement}
                               value={props.newPostText}
