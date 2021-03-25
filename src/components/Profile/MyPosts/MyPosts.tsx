@@ -2,6 +2,7 @@ import React from 'react';
 import profile from './MyPosts.module.css';
 import {Post} from "./Post/Post";
 import {PostMessagesPropsType} from "../../../App";
+import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../Redux/State";
 
 type MyPostsPropsType = {
     title: Array<PostMessagesPropsType>,
@@ -11,17 +12,19 @@ type MyPostsPropsType = {
 }
 
 
+
+
 export function MyPosts(props: MyPostsPropsType) {
 
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
     let addPost = () => {
-        props.dispatch({ type: 'ADD-POST' });
+        props.dispatch(addPostActionCreator());
     }
 
     let onPostChange = () => {
         let text = newPostElement.current?.value;
-        props.dispatch( { type: 'UPDATE-NEW-POST-TEXT', newText: text } );
+        props.dispatch(updateNewPostTextActionCreator(text));
     }
 
 
@@ -32,8 +35,9 @@ export function MyPosts(props: MyPostsPropsType) {
                 <div>
                     <textarea
                         onChange={onPostChange}
-                              ref={newPostElement}
-                              value={props.newPostText}
+                        ref={newPostElement}
+                        placeholder={'Enter you text'}
+                        value={props.newPostText}
                     />
 
                 </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import dialog from './Dialog.module.css';
+import {newMessageActionCreator, onMessageChangeActionCreator} from "../../../Redux/State";
 
 
 type DialogPropsType = {
@@ -9,21 +10,22 @@ type DialogPropsType = {
 }
 type textNewMessageType = any
 
+
+
 export function Dialog(props: DialogPropsType) {
 
     let textNewMessage: textNewMessageType = React.createRef();
     let newMessage = () => {
-       props.dispatch( {type: 'ADD-MESSAGE'} )
+       props.dispatch( newMessageActionCreator() )
     }
     let onMessageChange = () => {
         let text = textNewMessage.current.value;
-        props.dispatch( { type: 'UPDATE-NEW-MESSAGE-TEXT', newText: text} );
+        props.dispatch( onMessageChangeActionCreator(text) );
     }
 
     return (
 
         <div className={dialog.content}>
-
             <img className={dialog.avatar}
                  src={"https://cdn1.iconfinder.com/data/icons/diversity-avatars-volume-01-circles/64/matrix-neo-man-white-512.png"}
                  alt={"avatar"}/>
@@ -37,6 +39,7 @@ export function Dialog(props: DialogPropsType) {
                     }
                     <div>
                         <textarea ref={textNewMessage}
+                                  placeholder={'Enter you message'}
                                   onChange={onMessageChange}
                                   value={props.value}/>
                         <button onClick={newMessage}>

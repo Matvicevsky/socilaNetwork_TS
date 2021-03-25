@@ -35,6 +35,10 @@ export type PostMessagesPropsType = {
     count: number
 }
 
+const Add_Post = 'ADD-POST';
+const updateNewPostText = 'UPDATE-NEW-POST-TEXT';
+const Add_Message = 'ADD-MESSAGE';
+const updateNewMessageText = 'UPDATE-NEW-MESSAGE-TEXT';
 
 export let store = {
     _state: {
@@ -78,7 +82,7 @@ export let store = {
             }
         ],
         dialogMessage: ['Hello loser', 'How are you'],
-        newDialog: 'write text',
+        newDialog: '',
         // for profile>post
         PostMessages: [
             {
@@ -110,7 +114,7 @@ export let store = {
                 count: 422
             },
         ],
-        newPostText: 'it-kamasutra.com'
+        newPostText: ''
     },
 
     _callSubscriber  ( state: appStateType) {
@@ -123,10 +127,8 @@ export let store = {
         this._callSubscriber = observer;
 
     },
-
-
     dispatch(action: any) {  // { type: 'ADD-POST' }
-        if (action.type === 'ADD-POST') {
+        if (action.type === Add_Post) {
             let newPost = {
                 id: v1(),
                 avatar: "https://cdn2.iconfinder.com/data/icons/coding-7/100/coding-matrix-coding-developer-the-matrix-hacker-neo-program-low-level-code-512.png",
@@ -137,21 +139,27 @@ export let store = {
             this._state.PostMessages.push(newPost);
             this._callSubscriber (this._state);
             this._state.newPostText = '';
-        } else if ( action.type === 'UPDATE-NEW-POST-TEXT' ) {
+        } else if ( action.type === updateNewPostText ) {
             this._state.newPostText = action.newText;
             this._callSubscriber(this._state);
-        } else if (action.type === 'ADD-MESSAGE') {
+        } else if (action.type === Add_Message) {
             this._state.dialogMessage.push(this._state.newDialog);
             this._callSubscriber(this._state);
             this._state.newDialog = '';
-        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+        } else if (action.type === updateNewMessageText) {
             this._state.newDialog = action.newText;
             this._callSubscriber(this._state);
         }
     }
 }
 
+export let addPostActionCreator = () =>  ({ type: Add_Post })
 
+export let updateNewPostTextActionCreator = (text: string | undefined) => ({ type: updateNewPostText, newText: text })
+
+export let newMessageActionCreator = () => ({type: Add_Message})
+
+export let onMessageChangeActionCreator = (text: any) => ({ type: updateNewMessageText, newText: text})
 
 
 
