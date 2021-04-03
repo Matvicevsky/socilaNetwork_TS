@@ -8,15 +8,13 @@ import {Route} from 'react-router-dom';
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
+import {dialogPageType, profilePageType} from "./Redux/Store";
 
 type AppPropsType = {
     appState: {
         navbar: Array<AppNavbarPropsType>,
-        contactsMessage: Array<AppContactsMessagePropsType>,
-        PostMessages: Array<PostMessagesPropsType>,
-        newPostText: string | undefined
-        dialogMessage: Array<string>
-        newDialog: string
+        dialogPage: dialogPageType,
+        profilePage: profilePageType,
     }
     dispatch: any
 
@@ -25,14 +23,6 @@ type AppPropsType = {
 type AppNavbarPropsType = {
     id: string,
     title: string,
-    link: string
-}
-
-type AppContactsMessagePropsType = {
-    id: string,
-    avatar: string,
-    title: string,
-    nicName: string,
     link: string
 }
 
@@ -54,11 +44,10 @@ function App(props: AppPropsType) {
                 <Navbar title={props.appState.navbar}/>
                 <div className={"content"}>
                     <Route path={props.appState.navbar[0].link}
-                           render={() => <Profile title={props.appState.PostMessages}
-                                                  dispatch={props.dispatch}
-                                                  newPostText={props.appState.newPostText}/>}/>
+                           render={() => <Profile title={props.appState.profilePage}
+                                                  dispatch={props.dispatch}/>}/>
                     <Route path={props.appState.navbar[1].link}
-                           render={() => <Dialogs title={props.appState}
+                           render={() => <Dialogs title={props.appState.dialogPage}
                                                   dispatch={props.dispatch}/>}
                     />
                     <Route path={props.appState.navbar[2].link}

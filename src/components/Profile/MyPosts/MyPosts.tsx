@@ -2,7 +2,7 @@ import React from 'react';
 import profile from './MyPosts.module.css';
 import {Post} from "./Post/Post";
 import {PostMessagesPropsType} from "../../../App";
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../Redux/State";
+import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../Redux/Store";
 
 type MyPostsPropsType = {
     title: Array<PostMessagesPropsType>,
@@ -36,7 +36,7 @@ export function MyPosts(props: MyPostsPropsType) {
                     <textarea
                         onChange={onPostChange}
                         ref={newPostElement}
-                        placeholder={'Enter you text'}
+                        placeholder={'Enter you message'}
                         value={props.newPostText}
                     />
 

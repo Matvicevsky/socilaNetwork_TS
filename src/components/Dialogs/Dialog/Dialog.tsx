@@ -1,6 +1,6 @@
 import React from 'react';
 import dialog from './Dialog.module.css';
-import {newMessageActionCreator, onMessageChangeActionCreator} from "../../../Redux/State";
+import {newMessageActionCreator, onMessageChangeActionCreator} from "../../../Redux/Store";
 
 
 type DialogPropsType = {

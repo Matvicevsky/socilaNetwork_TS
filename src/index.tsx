@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {appStateType, store} from "./Redux/State";
+import {appStateType, store} from "./Redux/Store";
 import {BrowserRouter} from "react-router-dom";
 
 const rerenderEntireTree = (state: appStateType) => {
