@@ -1,9 +1,9 @@
 import React from 'react';
 import profile from './Profile.module.css';
-import {MyPosts} from "./MyPosts/MyPosts";
 import {MyDiscription} from "./MyPosts/Discription/MyDiscription";
-import {PostMessagesPropsType} from "../../App";
 import {profilePageType} from "../../Redux/Store";
+import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
+import {store} from "../../Redux/ReduxStore";
 
 type ProfilePostMessagesPropsType = {
     profilePage: profilePageType
@@ -20,9 +20,7 @@ export function Profile(props: ProfilePostMessagesPropsType) {
                  src="https://www.barnesandnoble.com/blog/sci-fi-fantasy/wp-content/nas-uploads/sites/4/2019/09/matrix.png"
                  alt="png"/>
             <MyDiscription/>
-            <MyPosts title={props.profilePage.PostMessages}
-                     newPostText={props.profilePage.newPostText}
-                     dispatch={props.dispatch}/>
+            <MyPostsContainer store={store} />
 
         </div>
     );

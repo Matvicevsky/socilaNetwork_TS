@@ -13,7 +13,7 @@ export type navbarItemPropsType = {
 }
 
 export function Navbar(props: navbarPropsType) {
-    debugger
+
     return (
         <nav className={navbar.siteBar}>
             {

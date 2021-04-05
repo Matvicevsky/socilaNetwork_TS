@@ -3,6 +3,8 @@ import {profileReducer} from "./profileReducer";
 import {dialogsReducer} from "./dialogsReducer";
 import {navbarReducer} from "./navbarReducer";
 
+export type AppReduxStateType = ReturnType<typeof reducers>
+
 let reducers = combineReducers({
     profilePage: profileReducer,
     dialogPage: dialogsReducer,
@@ -10,4 +12,4 @@ let reducers = combineReducers({
 });
 
 export let store: Store = createStore(reducers);
-export type AppReduxStateType = ReturnType<typeof reducers>
+

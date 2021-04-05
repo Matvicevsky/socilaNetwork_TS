@@ -1,12 +1,12 @@
 import React from 'react';
 import dialog from './Dialog.module.css';
-import {newMessageActionCreator, onMessageChangeActionCreator} from "../../../Redux/Store";
 
 
 type DialogPropsType = {
     title: Array<string>,
     value: string
-    dispatch: any
+    newMessage: () => void
+    onMessageChange: (text: string | undefined) => void
 }
 type textNewMessageType = any
 
@@ -16,11 +16,11 @@ export function Dialog(props: DialogPropsType) {
 
     let textNewMessage: textNewMessageType = React.createRef();
     let newMessage = () => {
-       props.dispatch( newMessageActionCreator() )
+       props.newMessage(  )
     }
     let onMessageChange = () => {
         let text = textNewMessage.current.value;
-        props.dispatch( onMessageChangeActionCreator(text) );
+        props.onMessageChange(text);
     }
 
     return (

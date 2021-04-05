@@ -31,7 +31,6 @@ export type PostMessagesPropsType = {
 
 
 function App(props: AppPropsType) {
-    debugger
     return (
         <div className="App-wrapper">
             <Header/>

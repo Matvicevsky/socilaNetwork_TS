@@ -2,11 +2,11 @@ import React from 'react';
 import profile from './MyPosts.module.css';
 import {Post} from "./Post/Post";
 import {PostMessagesPropsType} from "../../../App";
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../Redux/Store";
 
 type MyPostsPropsType = {
     title: Array<PostMessagesPropsType>,
-    dispatch: any
+    onPostChange: (text: string | undefined) => void
+    addPost : () => void
     newPostText: string | undefined
 
 }
@@ -15,16 +15,17 @@ type MyPostsPropsType = {
 
 
 export function MyPosts(props: MyPostsPropsType) {
-
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
-    let addPost = () => {
-        props.dispatch(addPostActionCreator());
+    let onAddPost = () => {
+        props.addPost();
+        //props.dispatch(addPostActionCreator());
     }
 
-    let onPostChange = () => {
+    let updatePostChange = () => {
         let text = newPostElement.current?.value;
-        props.dispatch(updateNewPostTextActionCreator(text));
+        props.onPostChange(text)
+        //props.dispatch(updateNewPostTextActionCreator(text));
     }
 
 
@@ -34,14 +35,14 @@ export function MyPosts(props: MyPostsPropsType) {
             <div>
                 <div>
                     <textarea
-                        onChange={onPostChange}
+                        onChange={updatePostChange}
                         ref={newPostElement}
                         placeholder={'Enter you message'}
                         value={props.newPostText}
                     />
 
                 </div>
-                <button onClick={addPost}>Add post</button>
+                <button onClick={onAddPost}>Add post</button>
             </div>
             <div>
                 <h4>posts</h4>

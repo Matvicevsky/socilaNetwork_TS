@@ -2,13 +2,13 @@ import React from 'react';
 import post from './Post.module.css';
 import {PostMessagesPropsType} from "../../../../App";
 
-type MyPostsPropsType = {
+type MyPostPropsType = {
     title: Array<PostMessagesPropsType>,
 
 }
 
-export function Post(props: MyPostsPropsType) {
-
+export function Post(props: MyPostPropsType) {
+debugger
         return (
         <div>
         {
