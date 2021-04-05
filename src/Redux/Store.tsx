@@ -64,6 +64,7 @@ export type  OnMessageChangeActionCreator = {
     type: 'UPDATE-NEW-MESSAGE-TEXT',
     newTitle: string | undefined,
 }
+
 export type ActionType = AddPostActionCreatorType | UpdateNewPostTextActionCreator | NewMessageActionCreator | OnMessageChangeActionCreator
 
 
@@ -159,7 +160,7 @@ export let store = {
         this._callSubscriber = observer;
     },
 
-    dispatch(action: any) {  // { type: 'ADD-POST' }
+    dispatch(action: ActionType) {  // { type: 'ADD-POST' }
 
         this._state.profilePage = profileReducer(this._state.profilePage, action);
         this._state.dialogPage = dialogsReducer(this._state.dialogPage, action);
