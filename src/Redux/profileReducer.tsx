@@ -2,8 +2,41 @@ import React from "react";
 import {v1} from "uuid";
 import {ActionType, profilePageType} from "./Store";
 
+let initialState = {
+    PostMessages: [
+        {
+            id: v1(),
+            avatar: "https://cdn1.iconfinder.com/data/icons/diversity-avatars-volume-01-circles/64/matrix-trinity-512.png",
+            nicName: "Trinitttttti",
+            message: "How are yuo",
+            count: 42
+        },
+        {
+            id: v1(),
+            avatar: "https://icons.iconarchive.com/icons/mattahan/ultrabuuf/256/TV-Smith-icon.png",
+            nicName: "Mr.Smith",
+            message: "I am kill yor",
+            count: 422
+        },
+        {
+            id: v1(),
+            avatar: "https://icons.iconarchive.com/icons/mattahan/ultrabuuf/256/TV-Smith-icon.png",
+            nicName: "Mrrrrr.Smith",
+            message: "I am kill yor",
+            count: 422
+        },
+        {
+            id: v1(),
+            avatar: "https://icons.iconarchive.com/icons/mattahan/ultrabuuf/256/TV-Smith-icon.png",
+            nicName: "Mr.Smith",
+            message: "I am kill yor",
+            count: 422
+        },
+    ],
+    newPostText: '',
+}
 
-export const profileReducer = (state: profilePageType, action: ActionType): profilePageType => {
+export const profileReducer = (state: profilePageType = initialState, action: ActionType): profilePageType => {
     switch (action.type) {
         case  'UPDATE-NEW-POST-TEXT' :
             if (action.newText != null) {

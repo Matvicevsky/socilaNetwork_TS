@@ -6,21 +6,22 @@ import {PostMessagesPropsType} from "../../App";
 import {profilePageType} from "../../Redux/Store";
 
 type ProfilePostMessagesPropsType = {
-    title: profilePageType
+    profilePage: profilePageType
     dispatch: any
 
 
 }
 
 export function Profile(props: ProfilePostMessagesPropsType) {
+
     return (
         <div className={profile.content}>
             <img className={profile.titlePng}
                  src="https://www.barnesandnoble.com/blog/sci-fi-fantasy/wp-content/nas-uploads/sites/4/2019/09/matrix.png"
                  alt="png"/>
             <MyDiscription/>
-            <MyPosts title={props.title.PostMessages}
-                     newPostText={props.title.newPostText}
+            <MyPosts title={props.profilePage.PostMessages}
+                     newPostText={props.profilePage.newPostText}
                      dispatch={props.dispatch}/>
 
         </div>
