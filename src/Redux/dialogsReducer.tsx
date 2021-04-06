@@ -1,6 +1,21 @@
 import React from "react";
-import {ActionType, dialogPageType} from "./Store";
+import {ActionType} from "./Store";
 import {v1} from "uuid";
+
+export type dialogPageType = {
+    contactsMessage: Array<AppContactsMessagePropsType>,
+    dialogMessage: Array<string>,
+    newDialog: string,
+}
+
+export type AppContactsMessagePropsType = {
+    id: string,
+    avatar: string,
+    title: string,
+    nicName: string,
+    link: string
+}
+
 
 let initialState = {
     contactsMessage: [
@@ -40,17 +55,19 @@ let initialState = {
 export const dialogsReducer = (state: dialogPageType = initialState, action: ActionType): dialogPageType => {
     switch (action.type) {
         case 'UPDATE-NEW-MESSAGE-TEXT' :
+            let copyState = {...state}
             if (action.newTitle != null) {
-                state.newDialog = action.newTitle;
+                copyState.newDialog = action.newTitle;
             }
-            return state
+            return copyState
         case 'ADD-MESSAGE':
-            debugger
+            let newState = {...state}
             let body = state.newDialog;
-            state.dialogMessage.push(body);
-            state.newDialog = '';
+            newState.dialogMessage = [...state.dialogMessage]
+            newState.dialogMessage.push(body);
+            newState.newDialog = '';
 
-            return state;
+            return newState;
         default:
             return state;
     }

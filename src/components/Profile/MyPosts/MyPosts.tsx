@@ -1,31 +1,28 @@
 import React from 'react';
 import profile from './MyPosts.module.css';
 import {Post} from "./Post/Post";
-import {PostMessagesPropsType} from "../../../App";
-
-type MyPostsPropsType = {
-    title: Array<PostMessagesPropsType>,
-    onPostChange: (text: string | undefined) => void
-    addPost : () => void
-    newPostText: string | undefined
-
-}
-
-
+import {MyPostsPropsType} from "./MyPostsContainer";
 
 
 export function MyPosts(props: MyPostsPropsType) {
+
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
     let onAddPost = () => {
+
         props.addPost();
         //props.dispatch(addPostActionCreator());
     }
 
     let updatePostChange = () => {
+
         let text = newPostElement.current?.value;
         props.onPostChange(text)
         //props.dispatch(updateNewPostTextActionCreator(text));
+    }
+    let onAddLike = (id: string, count: number) => {
+        debugger
+        props.addLike(id, count)
     }
 
 
@@ -46,7 +43,7 @@ export function MyPosts(props: MyPostsPropsType) {
             </div>
             <div>
                 <h4>posts</h4>
-                <Post title={props.title}/>
+                <Post title={props.title} onChange={onAddLike}/>
             </div>
         </div>
     );

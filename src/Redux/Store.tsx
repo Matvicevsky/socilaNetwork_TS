@@ -55,6 +55,11 @@ export type  UpdateNewPostTextActionCreator = {
     type: 'UPDATE-NEW-POST-TEXT',
     newText: string | undefined
 }
+export type addLikePostActionCreator = {
+    type: 'ADD-LIKE-POST'
+    id: string,
+    count: number
+}
 
 export type  NewMessageActionCreator = {
     type: 'ADD-MESSAGE',
@@ -65,7 +70,12 @@ export type  OnMessageChangeActionCreator = {
     newTitle: string | undefined,
 }
 
-export type ActionType = AddPostActionCreatorType | UpdateNewPostTextActionCreator | NewMessageActionCreator | OnMessageChangeActionCreator
+export type ActionType =
+    AddPostActionCreatorType
+    | UpdateNewPostTextActionCreator
+    | NewMessageActionCreator
+    | OnMessageChangeActionCreator
+    | addLikePostActionCreator
 
 
 export let store = {
@@ -172,14 +182,22 @@ export let store = {
 
 export let addPostActionCreator = (): AddPostActionCreatorType => ({type: 'ADD-POST'})
 
-export let updateNewPostTextActionCreator = (text: string | undefined ): UpdateNewPostTextActionCreator => ({
+export let updateNewPostTextActionCreator = (text: string | undefined): UpdateNewPostTextActionCreator => ({
     type: 'UPDATE-NEW-POST-TEXT',
     newText: text
+})
+export let addLikePostActionCreator = ( id: string, count: number): addLikePostActionCreator => ({
+    type: 'ADD-LIKE-POST',
+    count: count,
+    id: id
 })
 
 export let newMessageActionCreator = (): NewMessageActionCreator => ({type: 'ADD-MESSAGE'})
 
-export let onMessageChangeActionCreator = (text: string | undefined):OnMessageChangeActionCreator => ({type: 'UPDATE-NEW-MESSAGE-TEXT', newTitle: text})
+export let onMessageChangeActionCreator = (text: string | undefined): OnMessageChangeActionCreator => ({
+    type: 'UPDATE-NEW-MESSAGE-TEXT',
+    newTitle: text
+})
 
 
 

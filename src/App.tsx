@@ -1,26 +1,18 @@
 import React from 'react';
 import './App.css';
 import {Header} from "./components/Header/Header";
-import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Route} from 'react-router-dom';
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {AppReduxStateType} from "./Redux/ReduxStore";
-import {Dispatch} from "redux";
+import {NavbarContainer} from "./components/Navbar/NavbarContainer";
 
 type AppPropsType = {
-    appState: AppReduxStateType
-    dispatch: Dispatch
+
 }
 
-type AppNavbarPropsType = {
-    id: string,
-    title: string,
-    link: string
-}
 export type PostMessagesPropsType = {
     id: string,
     avatar: string,
@@ -30,27 +22,27 @@ export type PostMessagesPropsType = {
 }
 
 
+
+
 function App(props: AppPropsType) {
     return (
         <div className="App-wrapper">
             <Header/>
             <div className={"body"}>
-                <Navbar title={props.appState.navbar}/>
+                <NavbarContainer/>
                 <div className={"content"}>
-                    <Route path={props.appState.navbar[0].link}
+                    <Route path={"/profile"}
                            render={() =>
-                               <Profile profilePage={props.appState.profilePage}
-                                                  dispatch={props.dispatch}/>}/>
-                    <Route path={props.appState.navbar[1].link}
+                               <Profile/>}/>
+                    <Route path={"/dialogs"}
                            render={() =>
-                               <Dialogs title={props.appState.dialogPage}
-                                                  dispatch={props.dispatch}/>}
+                               <Dialogs />}
                     />
-                    <Route path={props.appState.navbar[2].link}
+                    <Route path={"/news"}
                            render={() => <News/>}/>
-                    <Route path={props.appState.navbar[3].link}
+                    <Route path={"/music"}
                            render={() => <Music/>}/>
-                    <Route path={props.appState.navbar[4].link}
+                    <Route path={"/settings"}
                            render={() => <Settings/>}/>
                 </div>
             </div>

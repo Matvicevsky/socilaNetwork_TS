@@ -1,31 +1,28 @@
 import React from 'react';
-import {newMessageActionCreator, onMessageChangeActionCreator} from "../../../Redux/Store";
+import { newMessageActionCreator, onMessageChangeActionCreator} from "../../../Redux/Store";
 import {Dialog} from "./Dialog";
+import {connect} from "react-redux";
+import {AppReduxStateType} from "../../../Redux/ReduxStore";
 
 
-type DialogContainerPropsType = {
-    store: any
-}
-type textNewMessageType = any
 
-
-export function DialogContainer(props: DialogContainerPropsType) {
-    debugger
-    let textNewMessage: textNewMessageType = React.createRef();
-
-    let newMessage = () => {
-        props.store.dispatch(newMessageActionCreator())
+let mapStateToProps = (state: AppReduxStateType) => {
+    return {
+        title: state.dialogPage.dialogMessage,
+        value: state.dialogPage.newDialog
     }
-    let onMessageChange = (text: string | undefined) => {
-        let action = onMessageChangeActionCreator(text)
-        props.store.dispatch(action);
-    }
-
-    return (
-        <Dialog title={props.store.getState().dialogPage.dialogMessage}
-                value={props.store.getState().dialogPage.newDialog}
-                newMessage={newMessage}
-                onMessageChange={onMessageChange}/>
-    );
-
 }
+let mapDispatchToProps = (dispatch: any) => {
+    return {
+        newMessage: () => {
+            dispatch(newMessageActionCreator())
+        },
+        onMessageChange: (text: string | undefined) => {
+            let action = onMessageChangeActionCreator(text)
+           dispatch(action);
+        },
+    }
+}
+
+
+export const DialogContainer = connect(mapStateToProps, mapDispatchToProps)(Dialog);
