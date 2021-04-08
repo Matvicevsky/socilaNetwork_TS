@@ -48,26 +48,26 @@ let initialState = {
             title: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto ea eligendi facere id"
         }
     ],
-    dialogMessage: ['navbarReducer.tsx', 'How are you'],
+    dialogMessage: ['navbarReducer.ts', 'How are you'],
     newDialog: '',
 }
 
 export const dialogsReducer = (state: dialogPageType = initialState, action: ActionType): dialogPageType => {
+    let stateCopy = {...state,
+        dialogMessage: [...state.dialogMessage]
+    }
     switch (action.type) {
         case 'UPDATE-NEW-MESSAGE-TEXT' :
-            let copyState = {...state}
             if (action.newTitle != null) {
-                copyState.newDialog = action.newTitle;
+                stateCopy.newDialog = action.newTitle;
             }
-            return copyState
+            return stateCopy
         case 'ADD-MESSAGE':
-            let newState = {...state}
             let body = state.newDialog;
-            newState.dialogMessage = [...state.dialogMessage]
-            newState.dialogMessage.push(body);
-            newState.newDialog = '';
+            stateCopy.dialogMessage.push(body);
+            stateCopy.newDialog = '';
 
-            return newState;
+            return stateCopy;
         default:
             return state;
     }

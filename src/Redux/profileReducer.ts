@@ -1,4 +1,3 @@
-import React from "react";
 import {v1} from "uuid";
 import {ActionType} from "./Store";
 
@@ -51,30 +50,31 @@ let initialState: profilePageType = {
 }
 
 export const profileReducer = (state: profilePageType = initialState, action: ActionType): profilePageType => {
-    let copyState = {...state}
+    let stateCopy = {...state}
     switch (action.type) {
         case  'UPDATE-NEW-POST-TEXT' :
             if (action.newText != null) {
-                copyState.newPostText = action.newText;
+                stateCopy.newPostText = action.newText;
             }
-            return copyState;
+            return stateCopy;
 
         case "ADD-LIKE-POST" :
-            return {...state,
-            PostMessages: state.PostMessages.map( (tl: PostMessagesPropsType) => tl.id  === action.id ? {...tl, count: ++action.count} : tl)}
+            stateCopy.PostMessages = [...state.PostMessages]
+            stateCopy.PostMessages = state.PostMessages.map( (tl: PostMessagesPropsType) => tl.id  === action.id ? {...tl, count: ++action.count} : tl)
+            return stateCopy
 
         case 'ADD-POST' :
             let newPost = {
                 id: v1(),
                 avatar: "https://cdn2.iconfinder.com/data/icons/coding-7/100/coding-matrix-coding-developer-the-matrix-hacker-neo-program-low-level-code-512.png",
                 nicName: "unnamed",
-                message: copyState.newPostText,
+                message: stateCopy.newPostText,
                 count: 0,
             };
-            copyState.PostMessages = [...state.PostMessages]
-            copyState.PostMessages.push(newPost);
-            copyState.newPostText = '';
-            return copyState;
+            stateCopy.PostMessages = [...state.PostMessages]
+            stateCopy.PostMessages.push(newPost);
+            stateCopy.newPostText = '';
+            return stateCopy;
 
         default:
             return state;

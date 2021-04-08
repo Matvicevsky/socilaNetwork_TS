@@ -8,10 +8,8 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {NavbarContainer} from "./components/Navbar/NavbarContainer";
+import {FindUsersContainer} from "./components/find-users/FindUsersContainer";
 
-type AppPropsType = {
-
-}
 
 export type PostMessagesPropsType = {
     id: string,
@@ -22,9 +20,7 @@ export type PostMessagesPropsType = {
 }
 
 
-
-
-function App(props: AppPropsType) {
+function App() {
     return (
         <div className="App-wrapper">
             <Header/>
@@ -36,7 +32,7 @@ function App(props: AppPropsType) {
                                <Profile/>}/>
                     <Route path={"/dialogs"}
                            render={() =>
-                               <Dialogs />}
+                               <Dialogs/>}
                     />
                     <Route path={"/news"}
                            render={() => <News/>}/>
@@ -44,6 +40,8 @@ function App(props: AppPropsType) {
                            render={() => <Music/>}/>
                     <Route path={"/settings"}
                            render={() => <Settings/>}/>
+                    <Route path={"/users"}
+                           render={() => <FindUsersContainer/>}/>
                 </div>
             </div>
         </div>

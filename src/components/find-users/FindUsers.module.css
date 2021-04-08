@@ -1,0 +1,39 @@
+.container{
+    height: 100vh;
+    background-color: gold;
+    font-weight: bold;
+    font-size: 18px
+}
+.block {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+.avatar{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ava{
+    width: 100px;
+}
+.info{
+    width: 80%;
+    border: 1px solid;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+.title{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.address{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}

@@ -1,5 +1,5 @@
 .content {
-
+    height: 100vh;
     background-color: gold;
     display: flex;
 }

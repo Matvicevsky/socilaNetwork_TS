@@ -120,7 +120,7 @@ export let store = {
                     title: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto ea eligendi facere id"
                 }
             ],
-            dialogMessage: ['navbarReducer.tsx', 'How are you'],
+            dialogMessage: ['navbarReducer.ts', 'How are you'],
             newDialog: '',
         },
         // for profile>post

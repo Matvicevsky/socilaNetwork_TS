@@ -11,7 +11,6 @@ export type mapStatePropsType = {
     newPostText: string
     title: Array<PostMessagesPropsType>
 }
-
 export type mapDispatchPropsType = {
     addPost: () =>  void
     onPostChange: (text: string | undefined) => void

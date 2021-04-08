@@ -14,7 +14,8 @@ let initialState = [
     {id: v1(), title: "Messages", link: "/dialogs"},
     {id: v1(), title: "News", link: "/news"},
     {id: v1(), title: "Music", link: "/music"},
-    {id: v1(), title: "Settings", link: "/settings"}
+    {id: v1(), title: "Settings", link: "/settings"},
+    {id: v1(), title: "Find Users", link: "/users"}
 ]
 
 export const navbarReducer = (state: Array<AppNavbarPropsType> = initialState, action: ActionType): Array<AppNavbarPropsType> => {
