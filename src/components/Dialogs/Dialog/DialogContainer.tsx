@@ -3,6 +3,7 @@ import { newMessageActionCreator, onMessageChangeActionCreator} from "../../../R
 import {Dialog} from "./Dialog";
 import {connect} from "react-redux";
 import {AppReduxStateType} from "../../../Redux/ReduxStore";
+import {Dispatch} from "redux";
 
 
 
@@ -12,7 +13,7 @@ let mapStateToProps = (state: AppReduxStateType) => {
         value: state.dialogPage.newDialog
     }
 }
-let mapDispatchToProps = (dispatch: any) => {
+let mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         newMessage: () => {
             dispatch(newMessageActionCreator())

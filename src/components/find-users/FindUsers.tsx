@@ -1,12 +1,13 @@
 import React from "react";
 import users from "./FindUsers.module.css"
 import {v1} from "uuid";
+import {FindUsersPropsType} from "./FindUsersContainer";
 
 
-export function FindUsers(props: any) {
+export function FindUsers(props: FindUsersPropsType) {
 
 
-    if (props.users.length === 0) {
+    if (props.users.users.length === 0) {
         props.setUsers([
                 {
                     id: v1(),
@@ -47,7 +48,7 @@ export function FindUsers(props: any) {
     return (
         <div className={users.container}>
             {
-                props.users.map((u: any) => <div key={u.id} className={users.block}>
+                props.users.users.map((u: any) => <div key={u.id} className={users.block}>
                     <div className={users.avatar}>
                         <div className={users.img}>
                             <img className={users.ava} src={u.avatar} alt={'avatar'}/>

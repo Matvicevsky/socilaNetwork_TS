@@ -2,10 +2,6 @@ import {v1} from "uuid";
 import {ActionType} from "./Store";
 
 
-export type profilePageType = {
-    PostMessages: any,
-    newPostText: string,
-}
 
 export type PostMessagesPropsType = {
     id: string,
@@ -15,7 +11,7 @@ export type PostMessagesPropsType = {
     count: number
 }
 
-let initialState: profilePageType = {
+let initialState = {
     PostMessages: [
         {
             id: v1(),
@@ -45,11 +41,12 @@ let initialState: profilePageType = {
             message: "I am kill yor",
             count: 422
         },
-    ],
+    ] as Array<PostMessagesPropsType>,
     newPostText: '',
 }
+export type initialStateType = typeof initialState
 
-export const profileReducer = (state: profilePageType = initialState, action: ActionType): profilePageType => {
+export const profileReducer = (state: initialStateType = initialState, action: ActionType): initialStateType => {
     let stateCopy = {...state}
     switch (action.type) {
         case  'UPDATE-NEW-POST-TEXT' :

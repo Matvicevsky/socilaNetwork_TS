@@ -2,15 +2,25 @@ import React from "react";
 import {connect} from "react-redux";
 import {FindUsers} from "./FindUsers";
 import {Dispatch} from "redux";
-import {followAC, setUsersAC, unFollowAC} from "../../Redux/findUsersReducer";
+import {followAC, InitialStateType, setUsersAC, unFollowAC, UserType} from "../../Redux/findUsersReducer";
+import {AppReduxStateType} from "../../Redux/ReduxStore";
 
+type MapStatePropsType = {
+    users: InitialStateType
+}
+type MapDispatchToPropsType = {
+    follow: (userId: string) => void,
+    unfollow: (userId: string) => void,
+    setUsers: (users: Array<UserType>) => void
+}
+export type FindUsersPropsType = MapStatePropsType & MapDispatchToPropsType
 
-let mapStateToProps = (state: any) => {
+let mapStateToProps = (state: AppReduxStateType): MapStatePropsType => {
     return {
-        users: state.usersPage.users
+        users: state.usersPage
     }
 }
-let mapDispatchToProps = (dispatch: Dispatch) => {
+let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
         follow: (userId: string) => {
             dispatch(followAC(userId));
@@ -18,7 +28,7 @@ let mapDispatchToProps = (dispatch: Dispatch) => {
         unfollow: (userId: string) => {
             dispatch(unFollowAC(userId));
         },
-        setUsers: (users: any) => {
+        setUsers: (users: Array<UserType>) => {
             dispatch(setUsersAC(users));
         }
     }

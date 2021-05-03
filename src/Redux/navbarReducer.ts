@@ -1,4 +1,3 @@
-import React from "react";
 import {v1} from "uuid";
 import {ActionType} from "./Store";
 
@@ -16,8 +15,9 @@ let initialState = [
     {id: v1(), title: "Music", link: "/music"},
     {id: v1(), title: "Settings", link: "/settings"},
     {id: v1(), title: "Find Users", link: "/users"}
-]
+] as Array<AppNavbarPropsType>
+type initialStateType = typeof initialState
 
-export const navbarReducer = (state: Array<AppNavbarPropsType> = initialState, action: ActionType): Array<AppNavbarPropsType> => {
+export const navbarReducer = (state: initialStateType = initialState, action: ActionType): initialStateType => {
     return state;
 }

@@ -1,4 +1,3 @@
-import React from "react";
 import {ActionType} from "./Store";
 import {v1} from "uuid";
 
@@ -15,7 +14,6 @@ export type AppContactsMessagePropsType = {
     nicName: string,
     link: string
 }
-
 
 let initialState = {
     contactsMessage: [
@@ -47,12 +45,16 @@ let initialState = {
             link: "/dialogs/mr.smith",
             title: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto ea eligendi facere id"
         }
-    ],
-    dialogMessage: ['navbarReducer.ts', 'How are you'],
+    ] as Array<AppContactsMessagePropsType>,
+    dialogMessage: ['navbarReducer.ts', 'How are you'] as Array<string>,
     newDialog: '',
 }
 
-export const dialogsReducer = (state: dialogPageType = initialState, action: ActionType): dialogPageType => {
+export type InitialStateType = typeof initialState
+
+
+
+export const dialogsReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
     let stateCopy = {...state,
         dialogMessage: [...state.dialogMessage]
     }

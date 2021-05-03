@@ -1,4 +1,3 @@
-import React from "react";
 import {v1} from "uuid";
 import {profileReducer} from "./profileReducer";
 import {dialogsReducer} from "./dialogsReducer";
@@ -19,13 +18,13 @@ export type AppNavbarPropsType = {
     link: string
 }
 
-export type dialogPageType = {
+ type dialogPageType = {
     contactsMessage: Array<AppContactsMessagePropsType>,
     dialogMessage: Array<string>,
     newDialog: string,
 }
 
-export type AppContactsMessagePropsType = {
+ type AppContactsMessagePropsType = {
     id: string,
     avatar: string,
     title: string,
@@ -51,31 +50,31 @@ export type  AddPostActionCreatorType = {
     type: 'ADD-POST'
 }
 
-export type  UpdateNewPostTextActionCreator = {
+export type  UpdateNewPostTextActionCreatorType = {
     type: 'UPDATE-NEW-POST-TEXT',
     newText: string | undefined
 }
-export type addLikePostActionCreator = {
+export type addLikePostActionCreatorType = {
     type: 'ADD-LIKE-POST'
     id: string,
     count: number
 }
 
-export type  NewMessageActionCreator = {
+export type  NewMessageActionCreatorType = {
     type: 'ADD-MESSAGE',
 }
 
-export type  OnMessageChangeActionCreator = {
+export type  OnMessageChangeActionCreatorType = {
     type: 'UPDATE-NEW-MESSAGE-TEXT',
     newTitle: string | undefined,
 }
 
 export type ActionType =
     AddPostActionCreatorType
-    | UpdateNewPostTextActionCreator
-    | NewMessageActionCreator
-    | OnMessageChangeActionCreator
-    | addLikePostActionCreator
+    | UpdateNewPostTextActionCreatorType
+    | NewMessageActionCreatorType
+    | OnMessageChangeActionCreatorType
+    | addLikePostActionCreatorType
 
 
 export let store = {
@@ -182,19 +181,19 @@ export let store = {
 
 export let addPostActionCreator = (): AddPostActionCreatorType => ({type: 'ADD-POST'})
 
-export let updateNewPostTextActionCreator = (text: string | undefined): UpdateNewPostTextActionCreator => ({
+export let updateNewPostTextActionCreator = (text: string | undefined): UpdateNewPostTextActionCreatorType => ({
     type: 'UPDATE-NEW-POST-TEXT',
     newText: text
 })
-export let addLikePostActionCreator = ( id: string, count: number): addLikePostActionCreator => ({
+export let addLikePostActionCreator = ( id: string, count: number): addLikePostActionCreatorType => ({
     type: 'ADD-LIKE-POST',
     count: count,
     id: id
 })
 
-export let newMessageActionCreator = (): NewMessageActionCreator => ({type: 'ADD-MESSAGE'})
+export let newMessageActionCreator = (): NewMessageActionCreatorType => ({type: 'ADD-MESSAGE'})
 
-export let onMessageChangeActionCreator = (text: string | undefined): OnMessageChangeActionCreator => ({
+export let onMessageChangeActionCreator = (text: string | undefined): OnMessageChangeActionCreatorType => ({
     type: 'UPDATE-NEW-MESSAGE-TEXT',
     newTitle: text
 })

@@ -1,22 +1,50 @@
-import {v1} from "uuid";
+//export type findUsersPageType = {}
 
-export type findUsersPageType = {}
-
-
-let initialState = {
-    users: [
-
-    ]
+export type UserLocationType = {
+    city: string,
+    country: string,
 }
 
+export type UserType = {
+    id: string,
+    avatar: string,
+    followed: boolean,
+    fullName: string,
+    status: string,
+    location: UserLocationType
+}
 
-export const findUsersReducer = (state: any = initialState, action: any): any => {
+let initialState: InitialStateType = {
+    users: [],
+
+}
+export type InitialStateType = {
+    users: Array<UserType>,
+}
+type followACType = {
+    type: 'FOLLOW',
+    userId: string
+}
+type unFollowACType = {
+    type: 'UNFOLLOW',
+    userId: string
+}
+
+type setUsersACType = {
+    type: 'SET-USERS',
+    users: Array<UserType>,
+}
+type AllActionCreatorType = followACType | unFollowACType | setUsersACType;
+
+
+export const findUsersReducer = (state: InitialStateType = initialState, action: AllActionCreatorType): InitialStateType => {
 
     switch (action.type) {
         case 'FOLLOW' :
-            return  {...state,
+            return {
+                ...state,
                 users: state.users.map((u: any) => {
-                    if(u.id === action.userId){
+                    if (u.id === action.userId) {
                         return {...u, followed: true}
                     }
                     return u;
@@ -24,9 +52,10 @@ export const findUsersReducer = (state: any = initialState, action: any): any =>
             }
 
         case 'UNFOLLOW' :
-            return  {...state,
+            return {
+                ...state,
                 users: state.users.map((u: any) => {
-                    if(u.id === action.userId){
+                    if (u.id === action.userId) {
                         return {...u, followed: false}
                     }
                     return u;
@@ -34,7 +63,7 @@ export const findUsersReducer = (state: any = initialState, action: any): any =>
             }
 
         case 'SET-USERS':
-            return {...state, users: [ ...state.users, ...action.users]}
+            return {...state, users: [...state.users, ...action.users]}
 
         default:
             return state
@@ -42,4 +71,4 @@ export const findUsersReducer = (state: any = initialState, action: any): any =>
 }
 export const followAC = (userId: string) => ({type: 'FOLLOW', userId})
 export const unFollowAC = (userId: string) => ({type: 'UNFOLLOW', userId})
-export const setUsersAC = (users: any) => ({type: 'SET-USERS', users})
+export const setUsersAC = (users: Array<UserType>) => ({type: 'SET-USERS', users})
