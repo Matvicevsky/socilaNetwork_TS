@@ -14,17 +14,15 @@ export type UserType = {
     location: UserLocationType
 }
 
-let initialState: InitialStateType = {
-    users: [],
-
-}
 export type InitialStateType = {
     users: Array<UserType>,
 }
+
 type followACType = {
     type: 'FOLLOW',
     userId: string
 }
+
 type unFollowACType = {
     type: 'UNFOLLOW',
     userId: string
@@ -34,8 +32,13 @@ type setUsersACType = {
     type: 'SET-USERS',
     users: Array<UserType>,
 }
+
 type AllActionCreatorType = followACType | unFollowACType | setUsersACType;
 
+
+let initialState: InitialStateType = {
+    users: [],
+}
 
 export const findUsersReducer = (state: InitialStateType = initialState, action: AllActionCreatorType): InitialStateType => {
 
