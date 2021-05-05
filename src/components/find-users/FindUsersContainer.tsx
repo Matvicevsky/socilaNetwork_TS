@@ -4,6 +4,7 @@ import {FindUsers} from "./FindUsers";
 import {Dispatch} from "redux";
 import {followAC, InitialStateType, setUsersAC, unFollowAC, UserType} from "../../Redux/findUsersReducer";
 import {AppReduxStateType} from "../../Redux/ReduxStore";
+import {FindUsersClass} from "./FindUsersClass";
 
 type MapStatePropsType = {
     users: InitialStateType
@@ -34,4 +35,4 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     }
 }
 
-export const FindUsersContainer = connect(mapStateToProps, mapDispatchToProps)(FindUsers)
+export const FindUsersContainer = connect(mapStateToProps, mapDispatchToProps)(FindUsersClass)
