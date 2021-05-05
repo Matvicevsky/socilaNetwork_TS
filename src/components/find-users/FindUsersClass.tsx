@@ -7,9 +7,8 @@ import someAvatar from "../../assets/images/someAvatar.png"
 
 export class FindUsersClass extends React.Component<FindUsersPropsType> {
 
-
-    getUsers = () => {
-
+    constructor(props: FindUsersPropsType) {
+        super(props);
         if (this.props.users.users.length === 0) {
 
             axios.get('https://social-network.samuraijs.com/api/1.0/users')
@@ -19,10 +18,21 @@ export class FindUsersClass extends React.Component<FindUsersPropsType> {
                 })
         }
     }
+    /*    getUsers = () => {
+
+        if (this.props.users.users.length === 0) {
+
+            axios.get('https://social-network.samuraijs.com/api/1.0/users')
+                .then(response => {
+                    this.props.setUsers(response.data.items
+                    )
+                })
+        }
+    }*/
+
     render = () => {
         return (
             <div className={users.container}>
-                <button onClick={this.getUsers}>Get users</button>
                 {
                     this.props.users.users.map((u: any) => <div key={u.id} className={users.block}>
                         <div className={users.avatar}>
