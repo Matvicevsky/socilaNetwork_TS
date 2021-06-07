@@ -14,9 +14,14 @@ export type UserType = {
     location: UserLocationType
 }
 
-export type InitialStateType = {
-    users: Array<UserType>,
-}
+export type InitialStateType =
+    {
+        users: Array<UserType>,
+        pageSize: number,
+        totalUserCount: number,
+        currentPage: number,
+        isFetching: boolean
+    }
 
 type followACType = {
     type: 'FOLLOW',
@@ -32,12 +37,35 @@ type setUsersACType = {
     type: 'SET-USERS',
     users: Array<UserType>,
 }
+type setCurrentPageACType = {
+    type: 'SET-CURRENT-PAGE',
+    currentPage: number
+}
+type setTotalUserCountACType = {
+    type: 'SET-TOTAL-USER-COUNT',
+    count: number
+}
+type setIsFetchingAC={
+    type: 'TOOGGLE-IS-FETCHING',
+    isFetching: boolean
 
-type AllActionCreatorType = followACType | unFollowACType | setUsersACType;
+}
+
+type AllActionCreatorType =
+    followACType
+    | unFollowACType
+    | setUsersACType
+    | setCurrentPageACType
+    | setTotalUserCountACType
+    | setIsFetchingAC;
 
 
-let initialState: InitialStateType = {
+let initialState = {
     users: [],
+    pageSize: 10,
+    totalUserCount: 0,
+    currentPage: 1,
+    isFetching: false
 }
 
 export const findUsersReducer = (state: InitialStateType = initialState, action: AllActionCreatorType): InitialStateType => {
@@ -46,7 +74,7 @@ export const findUsersReducer = (state: InitialStateType = initialState, action:
         case 'FOLLOW' :
             return {
                 ...state,
-                users: state.users.map((u: any) => {
+                users: state.users.map((u: UserType) => {
                     if (u.id === action.userId) {
                         return {...u, followed: true}
                     }
@@ -57,7 +85,7 @@ export const findUsersReducer = (state: InitialStateType = initialState, action:
         case 'UNFOLLOW' :
             return {
                 ...state,
-                users: state.users.map((u: any) => {
+                users: state.users.map((u: UserType) => {
                     if (u.id === action.userId) {
                         return {...u, followed: false}
                     }
@@ -65,8 +93,21 @@ export const findUsersReducer = (state: InitialStateType = initialState, action:
                 })
             }
 
-        case 'SET-USERS':
-            return {...state, users: [...state.users, ...action.users]}
+        case 'SET-USERS': {
+            return {...state, users: action.users}
+        }
+
+        case 'SET-CURRENT-PAGE': {
+            return {...state, currentPage: action.currentPage}
+        }
+
+        case 'SET-TOTAL-USER-COUNT': {
+            return {...state, totalUserCount: action.count}
+        }
+
+        case 'TOOGGLE-IS-FETCHING': {
+            return {...state, isFetching: action.isFetching}
+        }
 
         default:
             return state
@@ -75,3 +116,6 @@ export const findUsersReducer = (state: InitialStateType = initialState, action:
 export const followAC = (userId: string) => ({type: 'FOLLOW', userId})
 export const unFollowAC = (userId: string) => ({type: 'UNFOLLOW', userId})
 export const setUsersAC = (users: Array<UserType>) => ({type: 'SET-USERS', users})
+export const setCurrentPageAC = (currentPage: number) => ({type: 'SET-CURRENT-PAGE', currentPage})
+export const setTotalUserCountAC = (totalUserCount: number) => ({type: 'SET-TOTAL-USER-COUNT', count: totalUserCount})
+export const setIsFetchingAC = (isFetching: boolean) => ({type: 'TOOGGLE-IS-FETCHING', isFetching})

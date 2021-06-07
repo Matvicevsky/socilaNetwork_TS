@@ -18,7 +18,7 @@ let getUsers = () => {
     return (
         <div className={users.container}>
             <button onClick={getUsers}>Get users</button>
-            {
+            {/*{
                 props.users.users.map((u: any) => <div key={u.id} className={users.block}>
                     <div className={users.avatar}>
                         <div className={users.img}>
@@ -55,7 +55,7 @@ let getUsers = () => {
                     </div>
 
                 </div>)
-            }
+            }*/}
         </div>
     )
 }

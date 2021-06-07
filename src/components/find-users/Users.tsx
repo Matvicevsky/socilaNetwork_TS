@@ -1,32 +1,31 @@
 import React from "react";
-import users from "./FindUsers.module.css"
-import {FindUsersPropsType} from "./FindUsersContainer";
-import axios from "axios";
-import someAvatar from "../../assets/images/someAvatar.png"
+import users from "./FindUsers.module.css";
+import someAvatar from "../../assets/images/someAvatar.png";
+import {UsersPropsType} from "./FindUsersContainer";
+import {Preloader} from "../../common/Preloader/Preloader";
 
 
-export class FindUsersClass extends React.Component<FindUsersPropsType> {
+export let Users = (props: UsersPropsType) => {
 
-    componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
-            .then(response => {
-                this.props.setUsers(response.data.items
-                )
-            })
+    let pagesCount = Math.ceil(props.totalUserCount / props.pageSize)
+    let pages = [];
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i);
     }
+    return (
+        <div className={users.container}>
 
-    render = () => {
-        return (
-            <div className={users.container}>
-                <div className={users.selected}>
-                    <span className={users.selectedPage}>1</span>
-                    <span>2</span>
-                    <span>3</span>
-                    <span>4</span>
-                    <span>5</span>
-                </div>
-                {
-                    this.props.users.users.map((u: any) => <div key={u.id} className={users.block}>
+            {props.isFetching ?  <Preloader/> : null}
+
+            <div className={users.selected}>
+                {pages.map(p => {
+                    return (
+                        <span className={props.currentPage === p ? users.selectedPage : ''} onClick={() => {props.onPageChanged(p)}}>{p} </span>
+                    )
+                })}
+            </div>
+            {
+                props.users.users.map((u: any) => <div key={u.id} className={users.block}>
                         <div className={users.avatar}>
                             <div className={users.img}>
                                 <img className={users.ava}
@@ -35,10 +34,10 @@ export class FindUsersClass extends React.Component<FindUsersPropsType> {
                             <div className={users.button}>
                                 {u.followed ?
                                     <button onClick={() => {
-                                        this.props.unfollow(u.id)
+                                        props.unfollow(u.id)
                                     }}>follow</button> :
                                     <button onClick={() => {
-                                        this.props.follow(u.id)
+                                        props.follow(u.id)
                                     }}>unfollow</button>}
                             </div>
                         </div>
@@ -63,7 +62,7 @@ export class FindUsersClass extends React.Component<FindUsersPropsType> {
 
                     </div>)
                 }
-            </div>
+        </div>
         )
-    }
+
 }

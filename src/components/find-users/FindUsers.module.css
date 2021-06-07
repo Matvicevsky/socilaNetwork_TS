@@ -2,19 +2,30 @@
     height: 100%;
     background-color: gold;
     font-weight: bold;
-    font-size: 18px
+    font-size: 18px;
+    position: relative;
+
+}
+.preloader{
+    position: absolute;
+    left: 20%;
+    top: 30vh;
+    z-index: 1;
+}
+.selected{
+    font-weight: normal;
+    height: 50px;
+    overflow-y: scroll;
+}
+.selectedPage{
+    font-weight: bold;
 }
 .block {
     display: flex;
     justify-content: space-between;
     padding: 10px;
 }
-.selected{
-    font-weight: normal;
-}
-.selectedPage{
-    font-weight: bold;
-}
+
 .avatar{
     display: flex;
     flex-direction: column;
