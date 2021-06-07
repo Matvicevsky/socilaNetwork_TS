@@ -9,6 +9,12 @@
     justify-content: space-between;
     padding: 10px;
 }
+.selected{
+    font-weight: normal;
+}
+.selectedPage{
+    font-weight: bold;
+}
 .avatar{
     display: flex;
     flex-direction: column;
