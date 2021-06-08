@@ -10,3 +10,10 @@
     height: 60px;
     margin: 10px;
 }
+.loginBlock{
+    float: right;
+    
+}
+.loginBlock a {
+    color: #fff;
+}

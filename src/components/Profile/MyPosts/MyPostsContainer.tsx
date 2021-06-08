@@ -1,10 +1,8 @@
 import React from 'react';
-import {addLikePostActionCreator, addPostActionCreator, updateNewPostTextActionCreator} from "../../../Redux/Store";
+import {addLikePost, addPost, PostMessagesPropsType, updateNewPostText} from "../../../Redux/profileReducer";
 import {MyPosts} from "./MyPosts";
 import {connect} from "react-redux";
 import {AppReduxStateType} from "../../../Redux/ReduxStore";
-import {PostMessagesPropsType} from "../../../Redux/profileReducer";
-import {Dispatch} from "redux";
 
 
 export type mapStatePropsType = {
@@ -26,21 +24,11 @@ let mapStateToPost = (state: AppReduxStateType): mapStatePropsType => {
         title: state.profilePage.PostMessages
     }
 }
-let mapDispatchToPost = (dispatch: Dispatch): mapDispatchPropsType => {
-    return {
-        addPost: () => {
-            dispatch(addPostActionCreator())
-        },
-        onPostChange: (text: string | undefined) => {
-            let action = updateNewPostTextActionCreator(text)
-            dispatch(action);
-        },
-        addLike: ( id: string, count: number) => {
-            dispatch(addLikePostActionCreator(id, count))
-        },
-    }
+let mapDispatchToPost =  {
+        addPost: addPost,
+        onPostChange:  updateNewPostText,
+        addLike: addLikePost,
 }
-
 
 
 export const MyPostsContainer = connect(mapStateToPost, mapDispatchToPost)(MyPosts);

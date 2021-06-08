@@ -1,12 +1,12 @@
 import React from "react";
-import users from "../../components/find-users/FindUsers.module.css";
 import preLoader from "../../assets/images/preloader.svg";
+import preloader from "./Preloader.module.css"
 
 
 export function Preloader () {
     return (
         <div>
-            <img className={users.preloader}
+            <img className={preloader.preloader}
                                      src={preLoader}
                                      alt={'preloader'}/>
         </div>

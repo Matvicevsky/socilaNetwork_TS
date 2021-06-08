@@ -1,7 +1,5 @@
 import React from 'react';
 import './App.css';
-import {Header} from "./components/Header/Header";
-import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Route} from 'react-router-dom';
 import {News} from "./components/News/News";
@@ -9,6 +7,8 @@ import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {NavbarContainer} from "./components/Navbar/NavbarContainer";
 import {FindUsersContainer} from "./components/find-users/FindUsersContainer";
+import ProfileContainerClass from "./components/Profile/ProfileContainerClass";
+import HeaderContainer from "./components/Navbar/HeaderContainer";
 
 
 export type PostMessagesPropsType = {
@@ -23,13 +23,13 @@ export type PostMessagesPropsType = {
 function App() {
     return (
         <div className="App-wrapper">
-            <Header/>
+            <HeaderContainer/>
             <div className={"body"}>
                 <NavbarContainer/>
                 <div className={"content"}>
-                    <Route path={"/profile"}
+                    <Route path={"/profile/:userId?"}
                            render={() =>
-                               <Profile/>}/>
+                               <ProfileContainerClass/>}/>
                     <Route path={"/dialogs"}
                            render={() =>
                                <Dialogs/>}

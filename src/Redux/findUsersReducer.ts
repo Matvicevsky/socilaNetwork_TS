@@ -27,12 +27,10 @@ type followACType = {
     type: 'FOLLOW',
     userId: string
 }
-
 type unFollowACType = {
     type: 'UNFOLLOW',
     userId: string
 }
-
 type setUsersACType = {
     type: 'SET-USERS',
     users: Array<UserType>,
@@ -48,7 +46,6 @@ type setTotalUserCountACType = {
 type setIsFetchingAC={
     type: 'TOOGGLE-IS-FETCHING',
     isFetching: boolean
-
 }
 
 type AllActionCreatorType =
@@ -113,9 +110,9 @@ export const findUsersReducer = (state: InitialStateType = initialState, action:
             return state
     }
 }
-export const followAC = (userId: string) => ({type: 'FOLLOW', userId})
-export const unFollowAC = (userId: string) => ({type: 'UNFOLLOW', userId})
-export const setUsersAC = (users: Array<UserType>) => ({type: 'SET-USERS', users})
-export const setCurrentPageAC = (currentPage: number) => ({type: 'SET-CURRENT-PAGE', currentPage})
-export const setTotalUserCountAC = (totalUserCount: number) => ({type: 'SET-TOTAL-USER-COUNT', count: totalUserCount})
-export const setIsFetchingAC = (isFetching: boolean) => ({type: 'TOOGGLE-IS-FETCHING', isFetching})
+export const follow = (userId: string) => ({type: 'FOLLOW', userId})
+export const unfollow = (userId: string) => ({type: 'UNFOLLOW', userId})
+export const setUsers = (users: Array<UserType>) => ({type: 'SET-USERS', users})
+export const setCurrentPage = (currentPage: number) => ({type: 'SET-CURRENT-PAGE', currentPage})
+export const setTotalUserCount = (totalUserCount: number) => ({type: 'SET-TOTAL-USER-COUNT', count: totalUserCount})
+export const setIsFetching = (isFetching: boolean) => ({type: 'TOOGGLE-IS-FETCHING', isFetching})

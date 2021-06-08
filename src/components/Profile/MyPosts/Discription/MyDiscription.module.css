@@ -2,8 +2,13 @@
     display: flex;
 }
 .avatar {
-    width: 200px;
+    min-width: 200px;
 }
 .description {
     margin-left: 40px;
+}
+.contacts{
+}
+.keys{
+    font-weight: bold;
 }

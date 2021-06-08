@@ -3,15 +3,9 @@
     background-color: gold;
     font-weight: bold;
     font-size: 18px;
-    position: relative;
 
 }
-.preloader{
-    position: absolute;
-    left: 20%;
-    top: 30vh;
-    z-index: 1;
-}
+
 .selected{
     font-weight: normal;
     height: 50px;

@@ -171,7 +171,7 @@ export let store = {
 
     dispatch(action: ActionType) {  // { type: 'ADD-POST' }
 
-        this._state.profilePage = profileReducer(this._state.profilePage, action);
+      //  this._state.profilePage = profileReducer(this._state.profilePage, action);
         this._state.dialogPage = dialogsReducer(this._state.dialogPage, action);
         this._state.navbar = navbarReducer(this._state.navbar, action);
         this._callSubscriber(this._state);
@@ -179,13 +179,13 @@ export let store = {
     }
 }
 
-export let addPostActionCreator = (): AddPostActionCreatorType => ({type: 'ADD-POST'})
+ let addPostActionCreator = (): AddPostActionCreatorType => ({type: 'ADD-POST'})
 
-export let updateNewPostTextActionCreator = (text: string | undefined): UpdateNewPostTextActionCreatorType => ({
+let updateNewPostTextActionCreator = (text: string | undefined): UpdateNewPostTextActionCreatorType => ({
     type: 'UPDATE-NEW-POST-TEXT',
     newText: text
 })
-export let addLikePostActionCreator = ( id: string, count: number): addLikePostActionCreatorType => ({
+ let addLikePostActionCreator = ( id: string, count: number): addLikePostActionCreatorType => ({
     type: 'ADD-LIKE-POST',
     count: count,
     id: id

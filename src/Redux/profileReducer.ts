@@ -1,5 +1,4 @@
 import {v1} from "uuid";
-import {ActionType} from "./Store";
 
 
 
@@ -10,6 +9,29 @@ export type PostMessagesPropsType = {
     message: string,
     count: number
 }
+
+type AddPostType = {
+    type: 'ADD-POST'
+}
+type UpdateNewPostTextType = {
+    type: 'UPDATE-NEW-POST-TEXT',
+    newText: string | undefined
+}
+type addLikePostType = {
+    type: 'ADD-LIKE-POST',
+    count: number,
+    id: string
+}
+type setUserProfileType = {
+    type: 'SET-USER-PROFILE',
+    profile: any
+}
+
+type ProfileReduserActionType =
+    AddPostType |
+    UpdateNewPostTextType |
+    addLikePostType |
+    setUserProfileType;
 
 let initialState = {
     PostMessages: [
@@ -43,10 +65,11 @@ let initialState = {
         },
     ] as Array<PostMessagesPropsType>,
     newPostText: '',
+    profile: null
 }
 export type initialStateType = typeof initialState
 
-export const profileReducer = (state: initialStateType = initialState, action: ActionType): initialStateType => {
+export const profileReducer = (state: initialStateType = initialState, action: ProfileReduserActionType): initialStateType => {
     let stateCopy = {...state}
     switch (action.type) {
         case  'UPDATE-NEW-POST-TEXT' :
@@ -57,7 +80,10 @@ export const profileReducer = (state: initialStateType = initialState, action: A
 
         case "ADD-LIKE-POST" :
             stateCopy.PostMessages = [...state.PostMessages]
-            stateCopy.PostMessages = state.PostMessages.map( (tl: PostMessagesPropsType) => tl.id  === action.id ? {...tl, count: ++action.count} : tl)
+            stateCopy.PostMessages = state.PostMessages.map((tl: PostMessagesPropsType) => tl.id === action.id ? {
+                ...tl,
+                count: ++action.count
+            } : tl)
             return stateCopy
 
         case 'ADD-POST' :
@@ -73,8 +99,24 @@ export const profileReducer = (state: initialStateType = initialState, action: A
             stateCopy.newPostText = '';
             return stateCopy;
 
+        case 'SET-USER-PROFILE' :
+            return {...state, profile: action.profile}
+
         default:
-            return state;
+            return stateCopy;
     }
 
 }
+export let addPost = (): AddPostType => ({type: 'ADD-POST'})
+export let updateNewPostText = (text: string | undefined): UpdateNewPostTextType => ({
+    type: 'UPDATE-NEW-POST-TEXT',
+    newText: text
+})
+export let addLikePost = ( id: string, count: number): addLikePostType => ({
+    type: 'ADD-LIKE-POST',
+    count: count,
+    id: id
+})
+export const setUserProfile = (profile: any): setUserProfileType => ({
+    type: 'SET-USER-PROFILE', profile
+})

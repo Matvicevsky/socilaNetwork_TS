@@ -2,7 +2,6 @@ import React from "react";
 import users from "./FindUsers.module.css"
 import {FindUsersPropsType} from "./FindUsersContainer";
 import axios from "axios";
-import someAvatar from "../../assets/images/someAvatar.png"
 
 export function FindUsers(props: FindUsersPropsType) {
 let getUsers = () => {
