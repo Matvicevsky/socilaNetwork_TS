@@ -7,12 +7,13 @@ import {NavLink} from "react-router-dom";
 
 
 export let Users = (props: UsersPropsType) => {
-
     let pagesCount = Math.ceil(props.totalUserCount / props.pageSize)
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
     }
+
+
     return (
         <div className={users.container}>
 
@@ -37,13 +38,11 @@ export let Users = (props: UsersPropsType) => {
                             </NavLink>
                         </div>
                         <div className={users.button}>
-                            {u.followed ?
-                                <button onClick={() => {
-                                    props.unfollow(u.id)
-                                }}>follow</button> :
-                                <button onClick={() => {
-                                    props.follow(u.id)
-                                }}>unfollow</button>}
+                            {u.followed
+                                ? <button disabled={props.followingInProgress} onClick={() => {props.unFollowTC(u.id)}}>unfollow</button>
+
+                                : <button disabled={props.followingInProgress} onClick={() => {props.followTC(u.id)}}>follow</button>
+                            }
                         </div>
                     </div>
                     <div className={users.info}>

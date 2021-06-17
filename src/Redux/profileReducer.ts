@@ -1,4 +1,7 @@
 import {v1} from "uuid";
+import {Dispatch} from "redux";
+import {AppActionType, AppThunkType} from "./ReduxStore";
+import {usersAPI} from "../api/api";
 
 
 
@@ -27,7 +30,7 @@ type setUserProfileType = {
     profile: any
 }
 
-type ProfileReduserActionType =
+export type AllProfileReduserActionType =
     AddPostType |
     UpdateNewPostTextType |
     addLikePostType |
@@ -69,7 +72,7 @@ let initialState = {
 }
 export type initialStateType = typeof initialState
 
-export const profileReducer = (state: initialStateType = initialState, action: ProfileReduserActionType): initialStateType => {
+export const profileReducer = (state: initialStateType = initialState, action: AllProfileReduserActionType): initialStateType => {
     let stateCopy = {...state}
     switch (action.type) {
         case  'UPDATE-NEW-POST-TEXT' :
@@ -120,3 +123,12 @@ export let addLikePost = ( id: string, count: number): addLikePostType => ({
 export const setUserProfile = (profile: any): setUserProfileType => ({
     type: 'SET-USER-PROFILE', profile
 })
+
+export const setUserProfileTC = (userId: string): AppThunkType => {
+    return (dispatch: Dispatch<AppActionType>) => {
+        usersAPI.getUsersApi(userId)
+            .then(response => {
+               dispatch(setUserProfile(response.data))
+            })
+    }
+}

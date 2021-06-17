@@ -5,9 +5,11 @@ import header from './Header.module.css'
 export function Header(props: any) {
     return (
         <div className={header.header}>
-            <NavLink to={"/profile"}><img className={header.logo}
+            <NavLink to={"/profile"}>
+                <img className={header.logo}
                  src={"https://seeklogo.com/images/M/michigan-wolverines-logo-9E0DB2CF1E-seeklogo.com.png"}
-                    alt={"logo"}/></NavLink>
+                    alt={"logo"}/>
+            </NavLink>
             <div className={header.loginBlock}>
                 {props.isFetching ?
                     props.login :

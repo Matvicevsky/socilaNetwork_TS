@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {AppActionType, AppThunkType} from "./ReduxStore";
+import {usersAPI} from "../api/api";
 
 
 type dataType = {
@@ -11,7 +14,7 @@ type setUserDataACType = {
     data: dataType
 }
 
-type authReducerActionType =
+export type AllAuthReducerActionType =
     setUserDataACType
 
 
@@ -23,7 +26,7 @@ export let initialState = {
 }
 export type initialStateType = typeof initialState
 
-export const authReducer = (state: initialStateType = initialState, action: authReducerActionType): initialStateType => {
+export const authReducer = (state: initialStateType = initialState, action: AllAuthReducerActionType): initialStateType => {
 
     switch (action.type) {
         case  'SET-USER-DATA' :
@@ -43,3 +46,15 @@ export const setUserData = (userId: number, email: string, login: string): setUs
     type: 'SET-USER-DATA',
     data : {userId, email, login}
 })
+
+export const setUserDataTC = (): AppThunkType => {
+    return (dispatch: Dispatch<AppActionType>) => {
+        usersAPI.getLogin()
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    let {id, email, login} = response.data.data;
+                    dispatch(setUserData(id, email, login));
+                }
+            })
+    }
+}
