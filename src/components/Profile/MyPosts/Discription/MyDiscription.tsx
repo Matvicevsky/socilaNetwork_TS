@@ -1,9 +1,9 @@
 import React from 'react';
 import description from './MyDiscription.module.css';
 import {Preloader} from "../../../../common/Preloader/Preloader";
+import {ProfileStatus} from "./ProfileStatus";
 
 export function MyDiscription(props: any) {
-
 
     if (!props.profile) {
         return <Preloader/>
@@ -13,7 +13,7 @@ export function MyDiscription(props: any) {
                 <img className={description.avatar}
                      src={props.profile.photos.large} alt={'avatar'}/>
                 <div className={description.description}>
-                    <div>status: {props.profile.aboutMe}</div>
+                    <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
                     <div>name: {props.profile.fullName}</div>
                     {
                         Object.entries(props.profile.contacts).map(c => {

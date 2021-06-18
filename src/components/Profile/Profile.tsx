@@ -11,7 +11,7 @@ export function Profile(props: any) {
             <img className={profile.titlePng}
                  src="https://www.barnesandnoble.com/blog/sci-fi-fantasy/wp-content/nas-uploads/sites/4/2019/09/matrix.png"
                  alt="png"/>
-            <MyDiscription profile={props.profile}/>
+            <MyDiscription profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
             <MyPostsContainer/>
 
         </div>

@@ -1,10 +1,16 @@
 import React, {ComponentType} from "react";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
-import {addLikePost, addPost, setUserProfileTC, updateNewPostText} from "../../Redux/profileReducer";
+import {
+    addLikePost,
+    addPost,
+    getStatusTC,
+    setUserProfileTC,
+    updateNewPostText,
+    updateStatusTC
+} from "../../Redux/profileReducer";
 import {AppReduxStateType} from "../../Redux/ReduxStore";
 import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
-import {WithAuthRedirect} from "../../HOC/WithAuthRedirect";
 import {compose} from "redux";
 
 
@@ -12,6 +18,7 @@ type onPropsType = MapStatePropsType & MapDispatchPropsType
 
 type MapStatePropsType = {
     profile: any,
+    status: string
 }
 
 type MapDispatchPropsType = {
@@ -20,6 +27,8 @@ type MapDispatchPropsType = {
     addLikePost: ( id: string, count: number) => void,
     setUserProfileTC: (userId: string) => void
     Redirect: typeof Redirect
+    getStatusTC: (status: string) => void
+    updateStatusTC: (status: string) => void
 }
 
 type PathParamType = {
@@ -34,12 +43,14 @@ class ProfileContainerClass extends React.Component<PropsType> {
     componentDidMount() {
         let userId = this.props.match.params.userId
         this.props.setUserProfileTC(userId)
+
+        this.props.getStatusTC(userId)
     }
 
     render() {
         return (
             <div>
-                <Profile {...this.props} profile={this.props.profile}/>
+                <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatusTC}/>
             </div>
         )
     }
@@ -48,12 +59,13 @@ class ProfileContainerClass extends React.Component<PropsType> {
 
 let mapStateToProps = (state: AppReduxStateType): MapStatePropsType => ({
     profile: state.profilePage.profile,
+    status: state.profilePage.status,
+
 })
 
 export default compose<ComponentType>(
     connect(mapStateToProps,
-        { addPost, updateNewPostText, addLikePost, setUserProfileTC,Redirect}),
-    WithAuthRedirect,
+        { getStatusTC, updateStatusTC ,addPost, updateNewPostText, addLikePost, setUserProfileTC,Redirect}),
     withRouter,
 
 )(ProfileContainerClass)

@@ -1,8 +1,7 @@
 import {v1} from "uuid";
 import {Dispatch} from "redux";
 import {AppActionType, AppThunkType} from "./ReduxStore";
-import {usersAPI} from "../api/api";
-
+import {profileAPI} from "../api/api";
 
 
 export type PostMessagesPropsType = {
@@ -29,12 +28,14 @@ type setUserProfileType = {
     type: 'SET-USER-PROFILE',
     profile: any
 }
+type SetStatusType = ReturnType<typeof setStatus>
 
-export type AllProfileReduserActionType =
-    AddPostType |
-    UpdateNewPostTextType |
-    addLikePostType |
-    setUserProfileType;
+export type AllProfileReducerActionType =
+    | AddPostType
+    | UpdateNewPostTextType
+    | addLikePostType
+    | setUserProfileType
+    | SetStatusType
 
 let initialState = {
     PostMessages: [
@@ -68,11 +69,12 @@ let initialState = {
         },
     ] as Array<PostMessagesPropsType>,
     newPostText: '',
-    profile: null
+    profile: null,
+    status: ''
 }
 export type initialStateType = typeof initialState
 
-export const profileReducer = (state: initialStateType = initialState, action: AllProfileReduserActionType): initialStateType => {
+export const profileReducer = (state: initialStateType = initialState, action: AllProfileReducerActionType): initialStateType => {
     let stateCopy = {...state}
     switch (action.type) {
         case  'UPDATE-NEW-POST-TEXT' :
@@ -105,6 +107,10 @@ export const profileReducer = (state: initialStateType = initialState, action: A
         case 'SET-USER-PROFILE' :
             return {...state, profile: action.profile}
 
+        case "SET-STATUS":
+            return {...state, status: action.status}
+
+
         default:
             return stateCopy;
     }
@@ -115,7 +121,7 @@ export let updateNewPostText = (text: string | undefined): UpdateNewPostTextType
     type: 'UPDATE-NEW-POST-TEXT',
     newText: text
 })
-export let addLikePost = ( id: string, count: number): addLikePostType => ({
+export let addLikePost = (id: string, count: number): addLikePostType => ({
     type: 'ADD-LIKE-POST',
     count: count,
     id: id
@@ -123,12 +129,37 @@ export let addLikePost = ( id: string, count: number): addLikePostType => ({
 export const setUserProfile = (profile: any): setUserProfileType => ({
     type: 'SET-USER-PROFILE', profile
 })
+export const setStatus = (status: string) => ({
+    type: 'SET-STATUS', status
+} as const)
+
 
 export const setUserProfileTC = (userId: string): AppThunkType => {
     return (dispatch: Dispatch<AppActionType>) => {
-        usersAPI.getUsersApi(userId)
+        profileAPI.getProfileApi(userId)
             .then(response => {
-               dispatch(setUserProfile(response.data))
+                dispatch(setUserProfile(response.data))
+            })
+    }
+}
+
+export const getStatusTC = (userId: string): AppThunkType => {
+    return (dispatch: Dispatch<AppActionType>) => {
+        profileAPI.getStatus(userId)
+            .then(res => {
+                dispatch(setStatus(res.data))
+            })
+    }
+}
+
+export const updateStatusTC = (status: string): AppThunkType => {
+    return (dispatch: Dispatch<AppActionType>) => {
+        profileAPI.updateStatus(status)
+            .then(res => {
+                debugger
+                if (res.data.resultCode === 0) {
+                    dispatch(setStatus(status))
+                }
             })
     }
 }
