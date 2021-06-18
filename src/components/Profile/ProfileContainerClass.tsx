@@ -1,15 +1,17 @@
-import React from "react";
+import React, {ComponentType} from "react";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {addLikePost, addPost, setUserProfileTC, updateNewPostText} from "../../Redux/profileReducer";
 import {AppReduxStateType} from "../../Redux/ReduxStore";
-import {RouteComponentProps, withRouter} from "react-router-dom";
+import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import {WithAuthRedirect} from "../../HOC/WithAuthRedirect";
+import {compose} from "redux";
 
 
 type onPropsType = MapStatePropsType & MapDispatchPropsType
 
 type MapStatePropsType = {
-    profile: any
+    profile: any,
 }
 
 type MapDispatchPropsType = {
@@ -17,6 +19,7 @@ type MapDispatchPropsType = {
     updateNewPostText: (text: string | undefined) => void,
     addLikePost: ( id: string, count: number) => void,
     setUserProfileTC: (userId: string) => void
+    Redirect: typeof Redirect
 }
 
 type PathParamType = {
@@ -42,11 +45,15 @@ class ProfileContainerClass extends React.Component<PropsType> {
     }
 }
 
+
 let mapStateToProps = (state: AppReduxStateType): MapStatePropsType => ({
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
 })
 
-let withUrlDataContainerComponent = withRouter(ProfileContainerClass);
+export default compose<ComponentType>(
+    connect(mapStateToProps,
+        { addPost, updateNewPostText, addLikePost, setUserProfileTC,Redirect}),
+    WithAuthRedirect,
+    withRouter,
 
-export default connect(mapStateToProps,
-    { addPost, updateNewPostText, addLikePost, setUserProfileTC})(withUrlDataContainerComponent);
+)(ProfileContainerClass)

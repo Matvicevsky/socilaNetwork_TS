@@ -7,7 +7,7 @@ import {setUserDataTC} from "../../Redux/authReducer";
 export type HeaderContainerPropsType = MapStatePropsType & mapDispatchToPropsType
 
 type MapStatePropsType ={
-    isFetching: boolean,
+    isAuth: boolean,
     login: any
 }
 type mapDispatchToPropsType = {
@@ -29,7 +29,7 @@ class HeaderContainer extends React.Component<HeaderContainerPropsType> {
 }
 
 const mapStateToProps = (state: AppReduxStateType) => ({
-    isFetching: state.auth.isFetching,
+    isAuth: state.auth.isAuth,
     login: state.auth.login
 })
 

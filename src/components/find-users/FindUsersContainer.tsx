@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ComponentType} from 'react';
 import {connect} from 'react-redux';
 import {
     follow, followTC,
@@ -10,6 +10,8 @@ import {
 } from '../../Redux/findUsersReducer';
 import {AppReduxStateType} from '../../Redux/ReduxStore';
 import {Users} from './Users';
+import {WithAuthRedirect} from "../../HOC/WithAuthRedirect";
+import {compose} from "redux";
 
 
 type MapStatePropsType = {
@@ -90,5 +92,7 @@ let mapStateToProps = (state: AppReduxStateType): MapStatePropsType => {
     }
 }
 
-
-export const FindUsersContainer = connect(mapStateToProps, {follow, unfollow, setCurrentPage, setIsFollowingProgress, getUsersTC, unFollowTC, followTC})(UsersContainer)
+export default compose<ComponentType>(
+    connect(mapStateToProps, {follow, unfollow, setCurrentPage, setIsFollowingProgress, getUsersTC, unFollowTC, followTC}),
+    WithAuthRedirect
+)(UsersContainer)

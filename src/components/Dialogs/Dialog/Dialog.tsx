@@ -1,12 +1,15 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import dialog from './Dialog.module.css';
 
 
 type DialogPropsType = {
     title: Array<string>,
     value: string
-    newMessage: () => void
-    onMessageChange: (text: string | undefined) => void
+    newMessage: () => void,
+    onMessageChange: (text: string | undefined) => void,
+    isAuth: boolean,
+    Redirect: typeof Redirect
 }
 type textNewMessageType = any
 
@@ -22,7 +25,7 @@ export function Dialog(props: DialogPropsType) {
         let text = textNewMessage.current.value;
         props.onMessageChange(text);
     }
-
+   // if (!props.isAuth) return <Redirect to={'/login'}/>
     return (
 
         <div className={dialog.content}>

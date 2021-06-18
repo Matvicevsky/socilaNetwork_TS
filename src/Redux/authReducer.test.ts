@@ -14,5 +14,5 @@ beforeEach( () => {
 test("property isFetching should be correct changed", () => {
     const endState = authReducer(startState, setUserData(2, 'asda', 'asfasf'))
 
-    expect(endState.isFetching).toBe(true)
+    expect(endState.isAuth).toBe(true)
 })

@@ -4,8 +4,8 @@ import {MyDiscription} from "./MyPosts/Discription/MyDiscription";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 
 
-
 export function Profile(props: any) {
+
     return (
         <div className={profile.content}>
             <img className={profile.titlePng}

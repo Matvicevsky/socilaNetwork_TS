@@ -111,7 +111,7 @@ export const setTotalUserCount = (totalUserCount: number) => ({
     type: 'SET-TOTAL-USER-COUNT',
     count: totalUserCount
 } as const)
-export const setIsFetching = (isFetching: boolean) => ({type: 'TOGGLE-IS-FETCHING', isFetching} as const)
+export const setIsFetching = (isFetching: boolean) => ({type: 'TOGGLE-IS-FETCHING', isFetching: isFetching} as const)
 export const setIsFollowingProgress = (followingInProgress: boolean) => ({
     type: 'TOGGLE-IS-FOLLOWING-PROGRESS',
     followingInProgress

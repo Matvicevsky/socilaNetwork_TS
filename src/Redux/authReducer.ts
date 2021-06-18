@@ -22,7 +22,7 @@ export let initialState = {
     userId: null,
     email: null,
     login: null,
-    isFetching: false
+    isAuth: false
 }
 export type initialStateType = typeof initialState
 
@@ -33,7 +33,7 @@ export const authReducer = (state: initialStateType = initialState, action: AllA
             return {
                 ...state,
                 ...action.data,
-                isFetching: true
+                isAuth: true
             }
 
         default:

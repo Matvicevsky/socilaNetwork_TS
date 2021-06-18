@@ -1,16 +1,18 @@
-import React from 'react';
-import { newMessageActionCreator, onMessageChangeActionCreator} from "../../../Redux/Store";
+import {newMessageActionCreator, onMessageChangeActionCreator} from "../../../Redux/Store";
 import {Dialog} from "./Dialog";
 import {connect} from "react-redux";
 import {AppReduxStateType} from "../../../Redux/ReduxStore";
-import {Dispatch} from "redux";
-
+import {compose, Dispatch} from "redux";
+import {Redirect} from "react-router-dom";
+import {WithAuthRedirect} from "../../../HOC/WithAuthRedirect";
+import  {ComponentType} from "react";
 
 
 let mapStateToProps = (state: AppReduxStateType) => {
     return {
         title: state.dialogPage.dialogMessage,
-        value: state.dialogPage.newDialog
+        value: state.dialogPage.newDialog,
+        isAuth: state.auth.isAuth
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch) => {
@@ -22,8 +24,11 @@ let mapDispatchToProps = (dispatch: Dispatch) => {
             let action = onMessageChangeActionCreator(text)
            dispatch(action);
         },
+        Redirect
     }
 }
 
-
-export const DialogContainer = connect(mapStateToProps, mapDispatchToProps)(Dialog);
+ export default compose<ComponentType>(
+    connect(mapStateToProps, mapDispatchToProps),
+    WithAuthRedirect
+)(Dialog)

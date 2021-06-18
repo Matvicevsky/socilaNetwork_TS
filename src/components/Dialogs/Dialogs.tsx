@@ -1,6 +1,6 @@
 import React from 'react';
 import dialogs from './Dialogs.module.css';
-import {DialogContainer} from "./Dialog/DialogContainer";
+import DialogContainer from "./Dialog/DialogContainer";
 import {ContactsContainer} from "./Contacts/ContactsContainer";
 
 

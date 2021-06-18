@@ -6,9 +6,10 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {NavbarContainer} from "./components/Navbar/NavbarContainer";
-import {FindUsersContainer} from "./components/find-users/FindUsersContainer";
+import FindUsersContainer from "./components/find-users/FindUsersContainer";
 import ProfileContainerClass from "./components/Profile/ProfileContainerClass";
 import HeaderContainer from "./components/Navbar/HeaderContainer";
+import {Login} from "./components/Login/Login";
 
 
 export type PostMessagesPropsType = {
@@ -42,6 +43,8 @@ function App() {
                            render={() => <Music/>}/>
                     <Route path={"/settings"}
                            render={() => <Settings/>}/>
+                    <Route path={"/login"}
+                           render={() => <Login title={'Go log your  fucker'}/>}/>
 
                 </div>
             </div>
