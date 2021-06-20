@@ -25,6 +25,16 @@ export const usersAPI = {
 
     unFollowApi(id: string) {
         return instance.delete(`follow/${id}`, {})
+    },
+    login(email: string, password: string, rememberMe: boolean = false, captcha?: string ){
+        return instance.post('auth/login', {email, password, rememberMe, captcha})
+    },
+    getCaptcha(){
+        return instance.get('security/get-captcha-url')
+    },
+
+    logOut(){
+        return instance.delete('auth/login')
     }
 
 }
@@ -42,5 +52,6 @@ export const profileAPI = {
     updateStatus(status: string){
         return instance.put(`profile/status/ `, {status: status})
     },
+
 
 }

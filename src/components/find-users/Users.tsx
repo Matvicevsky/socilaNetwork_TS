@@ -4,6 +4,7 @@ import someAvatar from "../../assets/images/someAvatar.png";
 import {UsersPropsType} from "./FindUsersContainer";
 import {Preloader} from "../../common/Preloader/Preloader";
 import {NavLink} from "react-router-dom";
+import {Pagination} from "antd";
 
 
 export let Users = (props: UsersPropsType) => {
@@ -13,14 +14,13 @@ export let Users = (props: UsersPropsType) => {
         pages.push(i);
     }
 
-
     return (
         <div className={users.container}>
 
             {props.isFetching ? <Preloader/> : null}
 
             <div className={users.selected}>
-                {pages.map(p => {
+                 {pages.map(p => {
                     return (
                         <span className={props.currentPage === p ? users.selectedPage : ''} onClick={() => {
                             props.onPageChanged(p)
@@ -29,7 +29,9 @@ export let Users = (props: UsersPropsType) => {
                 })}
             </div>
             {
+
                 props.users.users.map((u: any) => <div key={u.id} className={users.block}>
+
                     <div className={users.avatar}>
                         <div className={users.img}>
                             <NavLink to={'/profile/' + u.id}>
@@ -39,9 +41,13 @@ export let Users = (props: UsersPropsType) => {
                         </div>
                         <div className={users.button}>
                             {u.followed
-                                ? <button disabled={props.followingInProgress} onClick={() => {props.unFollowTC(u.id)}}>unfollow</button>
+                                ? <button disabled={props.followingInProgress} onClick={() => {
+                                    props.unFollowTC(u.id)
+                                }}>unfollow</button>
 
-                                : <button disabled={props.followingInProgress} onClick={() => {props.followTC(u.id)}}>follow</button>
+                                : <button disabled={props.followingInProgress} onClick={() => {
+                                    props.followTC(u.id)
+                                }}>follow</button>
                             }
                         </div>
                     </div>

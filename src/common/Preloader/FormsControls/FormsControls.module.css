@@ -1,0 +1,25 @@
+.login input{
+    border: solid 1px;
+    border-radius: 10px;
+}
+.login.error input{
+    border: red solid 2px;
+    border-radius: 10px;
+}
+.password input{
+    border: solid 1px;
+    border-radius: 10px;
+}
+.password.error input{
+    border: red solid 2px;
+    border-radius: 10px;
+}
+
+.textarea textarea{
+    border: solid 1px;
+    border-radius: 10px;
+}
+.textarea.error textarea{
+    border: red solid 2px;
+    border-radius: 10px;
+}

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import dialog from './Dialog.module.css';
+import {DialogFormik} from './DialogFormik';
 
 
 type DialogPropsType = {
@@ -41,13 +42,7 @@ export function Dialog(props: DialogPropsType) {
                         props.title.map(t => <div className={dialog.dialog}>{t}</div>)
                     }
                     <div>
-                        <textarea ref={textNewMessage}
-                                  placeholder={'Enter you message'}
-                                  onChange={onMessageChange}
-                                  value={props.value}/>
-                        <button onClick={newMessage}>
-                            add message
-                        </button>
+                        <DialogFormik {...props}/>
                     </div>
                 </div>
             </div>

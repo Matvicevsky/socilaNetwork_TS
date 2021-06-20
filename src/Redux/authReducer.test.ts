@@ -6,7 +6,7 @@ beforeEach( () => {
     startState = {
         userId: null,
         email: null,
-        login: null,
+        email: null,
         isFetching: false
     }
 })

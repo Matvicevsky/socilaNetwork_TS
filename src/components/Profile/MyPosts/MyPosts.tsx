@@ -2,11 +2,12 @@ import React from 'react';
 import profile from './MyPosts.module.css';
 import {Post} from "./Post/Post";
 import {MyPostsPropsType} from "./MyPostsContainer";
+import {PostsFormik} from "./Discription/PostFormik";
 
 
 export function MyPosts(props: MyPostsPropsType) {
 
-    let newPostElement = React.createRef<HTMLTextAreaElement>();
+ /*   let newPostElement = React.createRef<HTMLTextAreaElement>();
 
     let onAddPost = () => {
 
@@ -19,9 +20,8 @@ export function MyPosts(props: MyPostsPropsType) {
         let text = newPostElement.current?.value;
         props.onPostChange(text)
         //props.dispatch(updateNewPostTextActionCreator(text));
-    }
+    }*/
     let onAddLike = (id: string, count: number) => {
-        debugger
         props.addLike(id, count)
     }
 
@@ -30,16 +30,7 @@ export function MyPosts(props: MyPostsPropsType) {
         <div className={profile.content}>
             <h4>my posts</h4>
             <div>
-                <div>
-                    <textarea
-                        onChange={updatePostChange}
-                        ref={newPostElement}
-                        placeholder={'Enter you message'}
-                        value={props.newPostText}
-                    />
-
-                </div>
-                <button onClick={onAddPost}>Add post</button>
+                   <PostsFormik  {...props} />
             </div>
             <div>
                 <h4>posts</h4>
