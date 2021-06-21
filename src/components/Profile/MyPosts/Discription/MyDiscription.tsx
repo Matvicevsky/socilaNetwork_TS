@@ -2,8 +2,15 @@ import React from 'react';
 import description from './MyDiscription.module.css';
 import {Preloader} from "../../../../common/Preloader/Preloader";
 import {ProfileStatus} from "./ProfileStatus";
+import {ProfileType} from "../../../../Redux/profileReducer";
 
-export function MyDiscription(props: any) {
+type MyDiscriptionPropsType = {
+    profile: ProfileType,
+    status: string,
+    updateStatus: (status: string) => void
+}
+
+export function MyDiscription(props: MyDiscriptionPropsType) {
 
     if (!props.profile) {
         return <Preloader/>

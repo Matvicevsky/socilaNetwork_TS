@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {
     addLikePost,
     addPost,
-    getStatusTC,
+    getStatusTC, ProfileType,
     setUserProfileTC,
     updateNewPostText,
     updateStatusTC
@@ -14,10 +14,10 @@ import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 import {compose} from "redux";
 
 
-type onPropsType = MapStatePropsType & MapDispatchPropsType
+export type onPropsType = MapStatePropsType & MapDispatchPropsType
 
 type MapStatePropsType = {
-    profile: any,
+    profile:  ProfileType,
     status: string
 }
 
@@ -50,7 +50,7 @@ class ProfileContainerClass extends React.Component<PropsType> {
     render() {
         return (
             <div>
-                <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatusTC}/>
+                <Profile {...this.props} profile={this.props.profile} status={this.props.status} />
             </div>
         )
     }

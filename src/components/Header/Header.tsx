@@ -2,7 +2,16 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import header from './Header.module.css'
 
-export function Header(props: any) {
+
+type HeaderPropsType = {
+    setUserDataTC: () => void
+    logOutTC: () => void
+    captchaTC: () => void
+    isAuth: boolean
+    login: string | null
+
+}
+export function Header(props: HeaderPropsType) {
     return (
         <div className={header.header}>
             <NavLink to={"/profile"}>

@@ -4,10 +4,10 @@ import {Dispatch} from "redux";
 
 
 type payloadType = {
-    userId: any,
-    email: any,
-    login: any,
-    isAuth: any,
+    userId: number  ,
+    email:  string | null,
+    login: string | null,
+    isAuth: boolean ,
 }
 
 type setUserDataACType = {
@@ -15,15 +15,16 @@ type setUserDataACType = {
     payload: payloadType,
 
 }
+
 type SetCaptchaType = {
     type: 'SET-CAPTCHA',
     captcha: boolean
-    url: string
+    url: string | undefined,
 }
 
 type SetMessagesType = {
     type: 'SET-MESSAGES'
-    messages: string
+    messages: string | null,
 }
 
 export type AllAuthReducerActionType =
@@ -33,13 +34,13 @@ export type AllAuthReducerActionType =
 
 
 export let initialState = {
-    userId: null,
-    email: null,
-    login: null,
+    userId:  16115,
+    email: null as string | null,
+    login: null as string | null,
     isAuth: false,
     captcha: false,
-    url: '',
-    messages: ''
+    url: undefined as string | undefined,
+    messages: null as string | null,
 }
 export type initialStateType = typeof initialState
 
@@ -69,12 +70,12 @@ export const authReducer = (state: initialStateType = initialState, action: AllA
 
 }
 
-export const setUserData = (userId: number | null, email: string | null, login: string | null, isAuth: boolean  ): setUserDataACType => ({
+export const setUserData = (userId: number   , email: string | null, login: string | null, isAuth: boolean  ): setUserDataACType => ({
     type: 'SET-USER-DATA',
-    payload: {userId, email, login: login, isAuth},
+    payload: {userId, email, login, isAuth},
 })
 
-export const setCaptcha = (captcha: boolean, url: string): SetCaptchaType => ({
+export const setCaptcha = (captcha: boolean, url: string | undefined): SetCaptchaType => ({
     type: 'SET-CAPTCHA',
     captcha,
     url,
@@ -104,7 +105,7 @@ export const captchaTC = (): AppThunkType => {
     }
 }
 
-export const loginTC = (email: string, password: string, rememberMe: boolean, captcha?: string): AppThunkType => {
+export const loginTC = (email: string , password: string , rememberMe: boolean , captcha?: string  ): AppThunkType => {
     return (dispatch) => {
         usersAPI.login(email, password, rememberMe, captcha)
             .then(res => {
@@ -121,10 +122,11 @@ export const loginTC = (email: string, password: string, rememberMe: boolean, ca
 
 export const logOutTC = (): AppThunkType => {
     return (dispatch) => {
+        debugger
         usersAPI.logOut()
             .then(res => {
                 if (res.data.resultCode === 0) {
-                    dispatch(setUserData(null, null, null, false));
+                    dispatch(setUserData(16115, null, null, false));
                 }
             })
     }

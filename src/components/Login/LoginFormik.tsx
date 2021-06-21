@@ -34,8 +34,8 @@ type PropsType = MapDispatchToProps & MapStateToProps
 type MapStateToProps = {
     isAuth: boolean,
     captcha: boolean,
-    url: string
-    messages: string
+    url: string | undefined,
+    messages: string | null,
 }
 type MapDispatchToProps = {
     loginTC: (email: string, password: string, rememberMe: boolean, captcha?: string) => void

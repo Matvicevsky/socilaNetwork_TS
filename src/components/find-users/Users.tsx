@@ -4,7 +4,6 @@ import someAvatar from "../../assets/images/someAvatar.png";
 import {UsersPropsType} from "./FindUsersContainer";
 import {Preloader} from "../../common/Preloader/Preloader";
 import {NavLink} from "react-router-dom";
-import {Pagination} from "antd";
 
 
 export let Users = (props: UsersPropsType) => {

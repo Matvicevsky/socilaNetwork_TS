@@ -37,6 +37,7 @@ export type AllProfileReducerActionType =
     | setUserProfileType
     | SetStatusType
 
+
 let initialState = {
     PostMessages: [
         {
@@ -69,9 +70,29 @@ let initialState = {
         },
     ] as Array<PostMessagesPropsType>,
     newPostText: '',
-    profile: null,
+    profile: {
+        aboutMe: null as string | null,
+        contacts: {
+            facebook: null as string | null,
+            website: null as string | null,
+            vk: null as string | null,
+            twitter: null as string | null,
+            instagram: null as string | null,
+            mainLink: null as string | null
+        },
+        fullName: null as string | null,
+        lookingForAJob: null as boolean | null,
+        lookingForAJobDescription: null as string | null,
+        photos: {
+            small: undefined as string | undefined,
+            large: undefined as string | undefined,
+        },
+        userId: null as string | null
+    },
     status: ''
 }
+export type ProfileType = typeof initialState.profile
+
 export type initialStateType = typeof initialState
 
 export const profileReducer = (state: initialStateType = initialState, action: AllProfileReducerActionType): initialStateType => {
@@ -105,6 +126,7 @@ export const profileReducer = (state: initialStateType = initialState, action: A
             return stateCopy;
 
         case 'SET-USER-PROFILE' :
+            debugger
             return {...state, profile: action.profile}
 
         case "SET-STATUS":
