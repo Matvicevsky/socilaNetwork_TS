@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/socilaNetwork_TS/static/css/main.3142aa3b.chunk.css",
+    "main.js": "/socilaNetwork_TS/static/js/main.6aea003b.chunk.js",
+    "main.js.map": "/socilaNetwork_TS/static/js/main.6aea003b.chunk.js.map",
+    "runtime-main.js": "/socilaNetwork_TS/static/js/runtime-main.b9d29fd7.js",
+    "runtime-main.js.map": "/socilaNetwork_TS/static/js/runtime-main.b9d29fd7.js.map",
+    "static/css/2.b4e56faa.chunk.css": "/socilaNetwork_TS/static/css/2.b4e56faa.chunk.css",
+    "static/js/2.625449c2.chunk.js": "/socilaNetwork_TS/static/js/2.625449c2.chunk.js",
+    "static/js/2.625449c2.chunk.js.map": "/socilaNetwork_TS/static/js/2.625449c2.chunk.js.map",
+    "index.html": "/socilaNetwork_TS/index.html",
+    "static/css/2.b4e56faa.chunk.css.map": "/socilaNetwork_TS/static/css/2.b4e56faa.chunk.css.map",
+    "static/css/main.3142aa3b.chunk.css.map": "/socilaNetwork_TS/static/css/main.3142aa3b.chunk.css.map",
+    "static/js/2.625449c2.chunk.js.LICENSE.txt": "/socilaNetwork_TS/static/js/2.625449c2.chunk.js.LICENSE.txt",
+    "static/media/preloader.c5c900b0.svg": "/socilaNetwork_TS/static/media/preloader.c5c900b0.svg",
+    "static/media/someAvatar.abe53919.png": "/socilaNetwork_TS/static/media/someAvatar.abe53919.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b9d29fd7.js",
+    "static/css/2.b4e56faa.chunk.css",
+    "static/js/2.625449c2.chunk.js",
+    "static/css/main.3142aa3b.chunk.css",
+    "static/js/main.6aea003b.chunk.js"
+  ]
+}
