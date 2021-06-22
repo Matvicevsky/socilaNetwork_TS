@@ -7,7 +7,6 @@ import {ContactsContainer} from "./Contacts/ContactsContainer";
 
 
 export function Dialogs() {
-
     return (
             <div className={dialogs.content}>
                 <ContactsContainer/>

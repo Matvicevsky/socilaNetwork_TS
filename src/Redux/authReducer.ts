@@ -1,13 +1,13 @@
 import {AppThunkType} from "./ReduxStore";
-import {usersAPI} from "../api/api";
+import {ResultCodeForCaptcha, ResultCodesEnum, usersAPI} from "../api/api";
 import {Dispatch} from "redux";
 
 
 type payloadType = {
-    userId: number  ,
-    email:  string | null,
+    userId: number,
+    email: string | null,
     login: string | null,
-    isAuth: boolean ,
+    isAuth: boolean,
 }
 
 type setUserDataACType = {
@@ -34,7 +34,7 @@ export type AllAuthReducerActionType =
 
 
 export let initialState = {
-    userId:  16115,
+    userId: 16115,
     email: null as string | null,
     login: null as string | null,
     isAuth: false,
@@ -70,7 +70,7 @@ export const authReducer = (state: initialStateType = initialState, action: AllA
 
 }
 
-export const setUserData = (userId: number   , email: string | null, login: string | null, isAuth: boolean  ): setUserDataACType => ({
+export const setUserData = (userId: number, email: string | null, login: string | null, isAuth: boolean): setUserDataACType => ({
     type: 'SET-USER-DATA',
     payload: {userId, email, login, isAuth},
 })
@@ -85,36 +85,47 @@ export const setMessages = (messages: string): SetMessagesType => ({
     type: 'SET-MESSAGES',
     messages
 })
-export const setUserDataTC = (): AppThunkType => {
+
+export const setUserIdTC = (): any => {
     return (dispatch: Dispatch) => {
         usersAPI.getLogin()
+            .then(res => res.data.data.id)
+    }
+
+}
+
+export const setUserDataTC = (): any => {
+    return (dispatch: Dispatch) => {
+        return usersAPI.getLogin()
             .then(response => {
-                if (response.data.resultCode === 0) {
+                if (response.data.resultCode === ResultCodesEnum.Success) {
                     let {id, email, login} = response.data.data;
                     dispatch(setUserData(id, email, login, true));
                 }
             })
     }
 }
+
+
 export const captchaTC = (): AppThunkType => {
     return (dispatch: Dispatch) => {
         usersAPI.getCaptcha()
             .then(res => {
-                    dispatch(setCaptcha(true, res.data.url))
+                dispatch(setCaptcha(true, res.data.url))
             })
     }
 }
 
-export const loginTC = (email: string , password: string , rememberMe: boolean , captcha?: string  ): AppThunkType => {
+export const loginTC = (email: string, password: string, rememberMe: boolean, captcha?: string): AppThunkType => {
     return (dispatch) => {
         usersAPI.login(email, password, rememberMe, captcha)
             .then(res => {
-                if (res.data.resultCode === 0) {
+                if (res.data.resultCode === ResultCodeForCaptcha.Success) {
                     dispatch(setUserDataTC())
-                }else if (res.data.resultCode === 10) {
+                } else if (res.data.resultCode === ResultCodeForCaptcha.CaptchaIsRequired) {
                     dispatch(captchaTC())
-                } else if (res.data.resultCode === 1) {
-                    dispatch(setMessages(res.data.messages))
+                } else if (res.data.resultCode === ResultCodeForCaptcha.Error) {
+                    dispatch(setMessages(res.data.messages[0]))
                 }
             })
     }
@@ -122,10 +133,9 @@ export const loginTC = (email: string , password: string , rememberMe: boolean ,
 
 export const logOutTC = (): AppThunkType => {
     return (dispatch) => {
-        debugger
         usersAPI.logOut()
             .then(res => {
-                if (res.data.resultCode === 0) {
+                if (res.data.resultCode === ResultCodesEnum.Success) {
                     dispatch(setUserData(16115, null, null, false));
                 }
             })

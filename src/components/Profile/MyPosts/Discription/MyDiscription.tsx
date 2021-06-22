@@ -5,9 +5,10 @@ import {ProfileStatus} from "./ProfileStatus";
 import {ProfileType} from "../../../../Redux/profileReducer";
 
 type MyDiscriptionPropsType = {
-    profile: ProfileType,
-    status: string,
-    updateStatus: (status: string) => void
+    profile: ProfileType | null,
+    status: string | null,
+    updateStatus: (status: string | null) => void
+    myId: number
 }
 
 export function MyDiscription(props: MyDiscriptionPropsType) {
@@ -20,7 +21,7 @@ export function MyDiscription(props: MyDiscriptionPropsType) {
                 <img className={description.avatar}
                      src={props.profile.photos.large} alt={'avatar'}/>
                 <div className={description.description}>
-                    <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                    <ProfileStatus status={props.status} updateStatus={props.updateStatus} userId={props.profile.userId} myId={props.myId}/>
                     <div>name: {props.profile.fullName}</div>
                     {
                         Object.entries(props.profile.contacts).map(c => {

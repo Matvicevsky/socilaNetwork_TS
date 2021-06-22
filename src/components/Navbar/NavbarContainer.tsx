@@ -9,12 +9,15 @@ export type mapStateNavbarPropsType = {
     title: Array<AppNavbarPropsType>
 }
 
+export type onPropsType = mapStateNavbarPropsType
+
 
 let mapStateToNavbar = (state: AppReduxStateType): mapStateNavbarPropsType => {
-    return{
-        title: state.navbar
+    return {
+        title: state.navbar.list
     }
 }
+
 
 export const NavbarContainer = connect(mapStateToNavbar)(Navbar)
 

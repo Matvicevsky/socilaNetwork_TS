@@ -4,7 +4,6 @@ import header from './Header.module.css'
 
 
 type HeaderPropsType = {
-    setUserDataTC: () => void
     logOutTC: () => void
     captchaTC: () => void
     isAuth: boolean

@@ -1,7 +1,8 @@
 import React, {ComponentType} from 'react';
 import {connect} from 'react-redux';
 import {
-    follow, followTC,
+    follow,
+    followTC,
     getUsersTC,
     setCurrentPage,
     setIsFollowingProgress,
@@ -10,17 +11,25 @@ import {
 } from '../../Redux/findUsersReducer';
 import {AppReduxStateType} from '../../Redux/ReduxStore';
 import {Users} from './Users';
-import {WithAuthRedirect} from "../../HOC/WithAuthRedirect";
 import {compose} from "redux";
+import {
+    getCurrentPageSelector,
+    getFollowingInProgressSelector,
+    getIsFetchingSelector,
+    getPageSizeSelector,
+    getTotalUserCountSelector,
+    getUsersSelector
+} from "../../Redux/findUsers-selector";
+import {UsersType} from "../../api/api";
 
 
 type MapStatePropsType = {
-    users: any,
-    pageSize: number,
-    totalUserCount:number,
-    currentPage: number,
-    isFetching: boolean,
-    followingInProgress: boolean
+    users: ReturnType<typeof getUsersSelector>,
+    pageSize: ReturnType<typeof getPageSizeSelector>
+    totalUserCount: ReturnType<typeof getTotalUserCountSelector>
+    currentPage: ReturnType<typeof getCurrentPageSelector>
+    isFetching: ReturnType<typeof getIsFetchingSelector>
+    followingInProgress: ReturnType<typeof getFollowingInProgressSelector>
 }
 
 type mapDispatchToPropsType = {
@@ -41,7 +50,7 @@ export type UsersPropsType = {
     pageSize: number,
     currentPage: number,
     onPageChanged: (pageNumber: number) => void
-    users: any,
+    users: Array<UsersType>,
     follow: (userId: string) => void,
     unfollow: (userId: string) => void,
     isFetching: boolean,
@@ -81,18 +90,18 @@ export class UsersContainer extends React.Component<FindUsersPropsType> {
     }
 }
 
+
 let mapStateToProps = (state: AppReduxStateType): MapStatePropsType => {
     return {
-        users: state.usersPage,
-        pageSize: state.usersPage.pageSize,
-        totalUserCount: state.usersPage.totalUserCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress,
+        users: getUsersSelector(state),
+        pageSize: getPageSizeSelector(state),
+        totalUserCount: getTotalUserCountSelector(state),
+        currentPage: getCurrentPageSelector(state),
+        isFetching: getIsFetchingSelector(state),
+        followingInProgress: getFollowingInProgressSelector(state),
     }
 }
 
 export default compose<ComponentType>(
     connect(mapStateToProps, {follow, unfollow, setCurrentPage, setIsFollowingProgress, getUsersTC, unFollowTC, followTC}),
-    WithAuthRedirect
 )(UsersContainer)

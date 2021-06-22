@@ -1,4 +1,3 @@
-import {ActionType} from "./Store";
 import {v1} from "uuid";
 
 export type dialogPageType = {
@@ -7,6 +6,8 @@ export type dialogPageType = {
     newDialog: string,
 }
 
+
+
 export type AppContactsMessagePropsType = {
     id: string,
     avatar: string,
@@ -14,6 +15,37 @@ export type AppContactsMessagePropsType = {
     nicName: string,
     link: string
 }
+
+type ActionType =
+    AddPostActionCreatorType
+    | UpdateNewPostTextActionCreatorType
+    | NewMessageActionCreatorType
+    | OnMessageChangeActionCreatorType
+    | addLikePostActionCreatorType
+
+export type  AddPostActionCreatorType = {
+    type: 'ADD-POST'
+}
+
+export type  UpdateNewPostTextActionCreatorType = {
+    type: 'UPDATE-NEW-POST-TEXT',
+    newText: string | undefined
+}
+export type addLikePostActionCreatorType = {
+    type: 'ADD-LIKE-POST'
+    id: string,
+    count: number
+}
+
+type  NewMessageActionCreatorType = {
+    type: 'ADD-MESSAGE',
+}
+
+type  OnMessageChangeActionCreatorType = {
+    type: 'UPDATE-NEW-MESSAGE-TEXT',
+    newTitle: string | undefined,
+}
+
 
 let initialState = {
     contactsMessage: [
@@ -74,3 +106,23 @@ export const dialogsReducer = (state: InitialStateType = initialState, action: A
             return state;
     }
 }
+export let newMessageActionCreator = (): NewMessageActionCreatorType => ({type: 'ADD-MESSAGE'})
+
+export let onMessageChangeActionCreator = (text: string | undefined): OnMessageChangeActionCreatorType => ({
+    type: 'UPDATE-NEW-MESSAGE-TEXT',
+    newTitle: text
+})
+
+
+
+export let addPostActionCreator = (): AddPostActionCreatorType => ({type: 'ADD-POST'})
+
+export let updateNewPostTextActionCreator = (text: string | undefined): UpdateNewPostTextActionCreatorType => ({
+    type: 'UPDATE-NEW-POST-TEXT',
+    newText: text
+})
+export let addLikePostActionCreator = ( id: string, count: number): addLikePostActionCreatorType => ({
+    type: 'ADD-LIKE-POST',
+    count: count,
+    id: id
+})

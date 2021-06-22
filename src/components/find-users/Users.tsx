@@ -29,7 +29,7 @@ export let Users = (props: UsersPropsType) => {
             </div>
             {
 
-                props.users.users.map((u: any) => <div key={u.id} className={users.block}>
+                props.users.map((u: any) => <div key={u.id} className={users.block}>
 
                     <div className={users.avatar}>
                         <div className={users.img}>

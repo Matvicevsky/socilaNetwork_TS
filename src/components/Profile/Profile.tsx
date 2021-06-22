@@ -6,15 +6,14 @@ import {onPropsType} from "./ProfileContainerClass";
 
 
 export function Profile(props: onPropsType) {
-
     return (
         <div className={profile.content}>
             <img className={profile.titlePng}
                  src="https://www.barnesandnoble.com/blog/sci-fi-fantasy/wp-content/nas-uploads/sites/4/2019/09/matrix.png"
                  alt="png"/>
-            <MyDiscription profile={props.profile} status={props.status} updateStatus={props.updateStatusTC}/>
+            <MyDiscription profile={props.profile} status={props.status} updateStatus={props.updateStatusTC}  myId={props.myId}/>
             <MyPostsContainer/>
-
         </div>
     );
 }
+

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ComponentType} from 'react';
 import './App.css';
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Route} from 'react-router-dom';
@@ -10,6 +10,12 @@ import FindUsersContainer from "./components/find-users/FindUsersContainer";
 import ProfileContainerClass from "./components/Profile/ProfileContainerClass";
 import HeaderContainer from "./components/Navbar/HeaderContainer";
 import LoginFormik from "./components/Login/LoginFormik";
+import {connect} from "react-redux";
+import {compose} from 'redux';
+import {initializeAppTC} from "./Redux/appReducer";
+import {AppReduxStateType} from "./Redux/ReduxStore";
+import {Preloader} from "./common/Preloader/Preloader";
+import {setUserDataTC} from "./Redux/authReducer";
 
 
 export type PostMessagesPropsType = {
@@ -20,36 +26,62 @@ export type PostMessagesPropsType = {
     count: number
 }
 
-
-function App() {
-    return (
-        <div className="App-wrapper">
-            <HeaderContainer/>
-            <div className={"body"}>
-                <NavbarContainer/>
-                <div className={"content"}>
-                    <Route path={"/profile/:userId?"}
-                           render={() =>
-                               <ProfileContainerClass/>}/>
-                    <Route path={"/dialogs"}
-                           render={() =>
-                               <Dialogs/>}
-                    />
-                    <Route path={"/users"}
-                           render={() => <FindUsersContainer/>}/>
-                    <Route path={"/news"}
-                           render={() => <News/>}/>
-                    <Route path={"/music"}
-                           render={() => <Music/>}/>
-                    <Route path={"/settings"}
-                           render={() => <Settings/>}/>
-                    <Route path={"/login"}
-                           render={() => <LoginFormik />}/>
-
-                </div>
-            </div>
-        </div>
-    );
+type MapDispatchPropsType = {
+    initializeAppTC: () => void
+    setUserDataTC: () => void
+}
+type MapStateToPropsType = {
+    initialized: boolean
+    userId: number
 }
 
-export default App;
+class App extends React.Component<MapDispatchPropsType & MapStateToPropsType> {
+
+    componentDidMount() {
+        this.props.initializeAppTC()
+    }
+
+    render() {
+        if (!this.props.initialized) {
+            return <Preloader/>
+        }
+            return (
+                <div className="App-wrapper">
+                    <HeaderContainer/>
+                    <div className={"body"}>
+                        <NavbarContainer/>
+                        <div className={"content"}>
+                            <Route path={`/profile/:userId?`}
+                                   render={() =>
+                                       <ProfileContainerClass/>}/>
+                            <Route path={"/dialogs"}
+                                   render={() =>
+                                       <Dialogs/>}
+                            />
+                            <Route path={"/users"}
+                                   render={() => <FindUsersContainer/>}/>
+                            <Route path={"/news"}
+                                   render={() => <News/>}/>
+                            <Route path={"/music"}
+                                   render={() => <Music/>}/>
+                            <Route path={"/settings"}
+                                   render={() => <Settings/>}/>
+                            <Route path={"/login"}
+                                   render={() => <LoginFormik/>}/>
+
+                        </div>
+                    </div>
+                </div>
+            );
+    }
+}
+
+const mapStateToProps = (state: AppReduxStateType) => ({
+    initialized: state.app.initialized,
+    userId: state.auth.userId
+})
+
+
+export default compose<ComponentType>(
+    connect(mapStateToProps, {initializeAppTC, setUserDataTC}),
+)(App);

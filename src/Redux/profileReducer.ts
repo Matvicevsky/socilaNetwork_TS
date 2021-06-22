@@ -1,7 +1,7 @@
 import {v1} from "uuid";
 import {Dispatch} from "redux";
 import {AppActionType, AppThunkType} from "./ReduxStore";
-import {profileAPI} from "../api/api";
+import {profileAPI, ResultCodesEnum} from "../api/api";
 
 
 export type PostMessagesPropsType = {
@@ -11,7 +11,6 @@ export type PostMessagesPropsType = {
     message: string,
     count: number
 }
-
 type AddPostType = {
     type: 'ADD-POST'
 }
@@ -37,7 +36,26 @@ export type AllProfileReducerActionType =
     | setUserProfileType
     | SetStatusType
 
-
+export type ProfileType = {
+    contacts: ContactsType,
+    fullName:  string | null,
+    lookingForAJob:  boolean | null,
+    lookingForAJobDescription:  string | null,
+    photos: PhotosType,
+    userId: number
+}
+type ContactsType = {
+    facebook:  string | null,
+    website: string | null,
+    vk:  string | null,
+    twitter: string | null,
+    instagram: string | null,
+    mainLink: string | null
+}
+type PhotosType={
+    small:  string | undefined,
+    large:  string | undefined,
+}
 let initialState = {
     PostMessages: [
         {
@@ -70,28 +88,9 @@ let initialState = {
         },
     ] as Array<PostMessagesPropsType>,
     newPostText: '',
-    profile: {
-        aboutMe: null as string | null,
-        contacts: {
-            facebook: null as string | null,
-            website: null as string | null,
-            vk: null as string | null,
-            twitter: null as string | null,
-            instagram: null as string | null,
-            mainLink: null as string | null
-        },
-        fullName: null as string | null,
-        lookingForAJob: null as boolean | null,
-        lookingForAJobDescription: null as string | null,
-        photos: {
-            small: undefined as string | undefined,
-            large: undefined as string | undefined,
-        },
-        userId: null as string | null
-    },
-    status: ''
+    profile: null as ProfileType | null,
+    status: '' as string
 }
-export type ProfileType = typeof initialState.profile
 
 export type initialStateType = typeof initialState
 
@@ -126,7 +125,6 @@ export const profileReducer = (state: initialStateType = initialState, action: A
             return stateCopy;
 
         case 'SET-USER-PROFILE' :
-            debugger
             return {...state, profile: action.profile}
 
         case "SET-STATUS":
@@ -148,15 +146,15 @@ export let addLikePost = (id: string, count: number): addLikePostType => ({
     count: count,
     id: id
 })
-export const setUserProfile = (profile: any): setUserProfileType => ({
+export const setUserProfile = (profile: ProfileType): setUserProfileType => ({
     type: 'SET-USER-PROFILE', profile
 })
-export const setStatus = (status: string) => ({
+export const setStatus = (status: string ) => ({
     type: 'SET-STATUS', status
 } as const)
 
 
-export const setUserProfileTC = (userId: string): AppThunkType => {
+export const setUserProfileTC = (userId:  number ): AppThunkType => {
     return (dispatch: Dispatch<AppActionType>) => {
         profileAPI.getProfileApi(userId)
             .then(response => {
@@ -178,7 +176,7 @@ export const updateStatusTC = (status: string): AppThunkType => {
     return (dispatch: Dispatch<AppActionType>) => {
         profileAPI.updateStatus(status)
             .then(res => {
-                if (res.data.resultCode === 0) {
+                if (res.data.resultCode === ResultCodesEnum.Success) {
                     dispatch(setStatus(status))
                 }
             })
